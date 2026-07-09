@@ -336,3 +336,180 @@ deprecate keyless `array{}`.
   (`list{1,2}` vs sound `list{1|2,1|2}`) be addressed in the same bleeding-edge
   bundle, or tracked separately? It shares the exact root. Current lean:
   **separate issue**, note the shared root, don't expand PR-B's blast radius.
+
+---
+
+## Type-theoretic audit (2026-07-09, post-convergence)
+
+Audit of the converged model against denotational semantics (a type = the set
+of runtime values it admits; `isList` trinary must mean: Yes iff *every*
+inhabitant satisfies `array_is_list`, No iff *none* does, Maybe otherwise).
+
+### A. Model-definition defects (must fix before proposing)
+
+**A1. The slogan "`array{...}` is never isList=Yes on its own" is
+denotationally false in degenerate cases.** Counterexamples, where every
+inhabitant IS a list, even under order-agnostic semantics:
+
+| Shape (sealed)      | Inhabitants                  | Correct isList | Current 2.2.x |
+| ------------------- | ---------------------------- | -------------- | ------------- |
+| `array{}`           | `[]` only                    | **Yes**        | Yes ✓         |
+| `array{0: T}`       | `[0=>t]` only (1 key ⇒ order trivial) | **Yes** | Yes ✓   |
+| `array{0?: T}`      | `[]`, `[0=>t]` — both lists  | **Yes**        | Yes ✓         |
+| `array{0:T, 1:U}`   | 2 keys ⇒ both orders exist   | Maybe          | Yes ✗ (#12725)|
+
+The PR's original `createEmptyIndeterminate` ("any explicit key ⇒ Maybe seed")
+**over-demotes** the singleton/empty cases from Yes to Maybe — a precision
+regression the blanket rule would bake in. The rule must be restated
+denotationally, not syntactically: *isList = Yes iff the key structure admits
+no non-list realisation* (all-int-sequential-from-0 with **at most one
+realisable permutation**, i.e. ≤1 required key beyond trivial cases + optional
+tail structure), Maybe when both list and non-list realisations exist, No when
+none is a list.
+
+**A2. Optional keys: current stable has the *dual* false positive (No-side),
+discovered by this audit.** Measured on 2.2.x:
+
+- `array{a?: string}` → `array_is_list()` reported "always **false**". Wrong:
+  `[]` is an inhabitant (optional key absent) and `array_is_list([]) === true`
+  ⇒ correct answer is **Maybe**.
+- `array{0: string, a?: string}` → "always false". Wrong: `[0=>'x']` is a list
+  inhabitant ⇒ **Maybe**.
+- `array{1: string}` → "always false" ✓ (correct: sole inhabitant `[1=>x]`).
+
+So current `isList` computation treats optional keys as always-present. This is
+a **new, independent bug in stable** — same family as #12725 but on the No
+side. Candidate separate issue; PR-B's implementation must get the optional-key
+combinatorics right in the builder's trinary transitions (e.g. Maybe seed +
+required key 5 ⇒ **No**, not Maybe; optional string key on otherwise-list
+shape ⇒ Maybe, not No).
+
+### B. The "uniformly order-agnostic" claim is not delivered by PR-B alone
+
+Measured: the order-*trusting* (unsound under permutation-acceptance) transfer
+functions are broader than array_values/array_keys:
+
+| Op on `array{a:1, b:2}` | Inferred        | Sound?      |
+| ----------------------- | --------------- | ----------- |
+| `array_values`          | `list{1,2}`     | ✗ unsound   |
+| `array_keys`            | `list{'a','b'}` | ✗ unsound   |
+| `array_slice($a,0,1)`   | `array{a: 1}`   | ✗ unsound   |
+| `array_reverse`         | `array{b:2,a:1}`| ✗ unsound   |
+| `array_shift` / `array_pop` | `1\|2`      | ✓ sound     |
+| `end` / `array_key_first/last` | union    | ✓ sound     |
+| `foreach` / `reset`     | union           | ✓ sound     |
+
+Post-PR-B the system remains **operation-dependently denoted**: order-agnostic
+for identity/acceptance/isList, order-trusting for positional projections. That
+is a *known, documented* unsoundness (pragmatic precision), but the proposal
+text must not claim uniform order-agnosticism — state it as "order-agnostic
+for acceptance and list-ness; declared order still trusted by positional
+projections (tracked separately)".
+
+### C. Type-algebra implementation requirements (without these, Maybe is a dead end)
+
+- **C1. Intersection refinement:** `ConstantArrayType(isList=Maybe) ∧
+  AccessoryArrayListType ⇒ isList=Yes`, and subtraction `∖ list ⇒ isList=No`.
+  Without this, `&list` (#12725 `$b`) and `assert(array_is_list())` narrowing
+  silently stay Maybe. Note the model's structural strength here: because the
+  type tracks key→type (not position→type) and that mapping is
+  permutation-invariant, narrowing is *exactly* an isList-flag flip — no key
+  reshuffling. Clean.
+- **C2. Equality/normalisation:** `equals()` must distinguish isList states, and
+  order-agnostic equality demands a canonical key order:
+  `array{1:T, 0:U}` ≡ `array{0:U, 1:T}` (sort by key **Type**, never by
+  `describe()` — per CLAUDE.md). Otherwise unions/result-cache conflate or
+  duplicate.
+- **C3. Move `accepts` and `isSuperTypeOf` together**, or parameter checks and
+  return-type covariance checks diverge on the same pair of types.
+- **C4. Non-denotable residue:** `isList=No` with keys `{0,1}` (result of
+  subtracting list) has no PHPDoc syntax; acceptable (accessories already do
+  this) but error messages will print it as plain `array{0:T,1:T}` — ambiguity
+  to tolerate knowingly.
+
+### D. Blast-radius items under-estimated in the proposal
+
+- **D-1. Maybe-accepts becomes an error:** any `array{0:T,1:T}`-typed value
+  flowing into a `list<T>` / `list{...}` position (params, covariant returns,
+  property writes, template bounds) becomes a new error under PR-B. Intended,
+  but should be enumerated in the announcement (this *is* the "hundreds of
+  errors" analogue).
+- **D-2. describe() churn is bigger than sealed's:** if inferred Yes-lists
+  (every literal `['a','b']`!) render as `list{'a','b'}`, virtually every
+  `assertType`/baseline string in the ecosystem changes. Rendering `list{}`
+  only for shapes *written* as list-shapes would break describe-as-canonical
+  (two equal types printing differently). This needs an explicit decision;
+  neither option is free.
+
+### E. Minor rollout notes
+
+- **E1. PR-A is a semantic no-op on current stable** (both spellings already
+  resolve to the identical type). Frame it honestly as "no behavioural change
+  now; prevents precision regression under PR-B", not "precision gain".
+- **E2.** Mixed keyless/explicit auto-indexing (`array{T1, 5: T2, T3}` ⇒ keys
+  0,5,6 ⇒ No) and impossible list shapes (`list{0?:T, 1:T}`) must resolve per
+  the denotational rule (No / ErrorType), with builder-transition tests.
+- **E3.** Landing in the same bleedingEdge wave as sealed compounds user churn;
+  sealed-composition pain (#14722) is still open. Sequencing risk, not a
+  soundness defect.
+
+### What the audit confirms as sound
+
+- The subtype lattice `list{T1,T2} <: array{0:T1,1:T2}` is coherent (strictly
+  more constrained; isSuperTypeOf Yes one way, Maybe the other).
+- TrinaryLogic gives an *exact* denotational semantics for list-ness — the
+  model needs no new machinery, only correct transitions.
+- Permutation-invariant key→type structure makes narrowing/widening on
+  list-ness purely a flag operation (no structural surgery).
+- String-required-key ⇒ No and gap-required-key ⇒ No match current behaviour.
+
+### Audit verdict
+
+The model survives: no contradiction in the core lattice. Required amendments:
+restate the isList rule denotationally (fixes A1), add the optional-key
+trinary cases (A2, also a separable stable bugfix), scope the order-agnostic
+claim to acceptance/identity (B), and add C1–C3 to PR-B's definition of done.
+D-2 (describe churn) — resolved below as D4.
+
+---
+
+## D4 — describe(): keep round-trip faithfulness; `list{...}` for every Yes-list (RESOLVED)
+
+**Settled by zonuexe 2026-07-09.**
+
+**Finding that reframed the question.** `list{...}` rendering already exists:
+`ConstantArrayType::shouldBeDescribedAsAList()` (also used by
+`toPhpDocNode()`, so PHPDoc generation stays consistent for free). Its current
+trigger encodes an existing principle: *render `list` exactly when the
+`array{...}` spelling would lose list-ness on round-trip* (today: only
+multi/non-tail optional keys, e.g. `list{0?: string, 1?: string}` — 41 such
+asserts in nsrt already). Under PR-B, keyless `array{'a','b'}` parses to
+Maybe, so the `array{...}` spelling becomes lossy for **every** Yes-list — the
+existing principle then *entails* `shouldBeDescribedAsAList() ≡
+isList->yes()`. D-2 was never "should describe change?" but "keep or abandon
+round-trip faithfulness?".
+
+**Why the soft alternative fails.** Keeping `array{...}` at value-level
+verbosity guarantees nonsense collisions — `list{T,T}` vs Maybe `array{T,T}`
+differ *only* in list-ness, so errors would read "expects array{string,
+string}, array{string, string} given": the exact UX failure the
+precise/💡-reason machinery exists to prevent. Rejected.
+
+**Decision.**
+1. Extend `shouldBeDescribedAsAList()` to plain `$this->isList->yes()`
+   (subsumes the current optional-key conditions), gated on the **same
+   bleedingEdge toggle as the PR-B semantic bundle** (describe and semantics
+   flip together; stable output unchanged until 3.0).
+2. Maybe-list with sequential keys renders **keyless** `array{'a','b'}` —
+   post-PR-B that spelling round-trips to Maybe, so it is faithful and terse
+   (current `$exportValuesOnly` logic unchanged).
+3. Subtraction residue `isList=No` with sequential keys is non-denotable;
+   renders keyed `array{0:…, 1:…}` — tolerated ambiguity (audit C4).
+
+**Churn, quantified (phpstan-src alone).** ≥995 of 1,923 `array{` assertType
+strings in nsrt flip (pure keyless tuples, all Yes-lists), plus Yes-lists with
+optional tails; parts of 272 rule-test files mentioning `array{`. Fixes are
+mechanical (re-run, accept). Precedent: PHPStan shipped mass describe changes
+before (accessory types such as `non-falsy-string`) even in minors; this one
+is BE-gated, hence more conservative. Announcement should state the rendering
+change explicitly so extension authors expect test-expectation updates.
