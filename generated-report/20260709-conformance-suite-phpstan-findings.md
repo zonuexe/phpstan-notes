@@ -1,9 +1,10 @@
-# Conformance suite build + PHPStan array-shape findings
+# Conformance suite build + PHPStan findings (array-shape and beyond)
 
 Session on the `php-typing-conformance` repo (cross-analyzer conformance suite:
-PHPStan, PHPStan-strict, Psalm, Mago, Phan, NoVerify). Two outcomes: (1) a new
+PHPStan, PHPStan-strict, Psalm, Mago, Phan, NoVerify). Outcomes: (1) a new
 regression track + a corpus divergence sweep, (2) a verified enumeration of
-PHPStan array-shape / `ConstantArrayType` bugs and reinforcement points.
+PHPStan array-shape / `ConstantArrayType` bugs and reinforcement points (Part 2),
+(3) verified PHPStan gaps that do **not** involve `ConstantArrayType` (Part 4).
 
 Engine versions used here (conformance repo's pinned binaries): **PHPStan 2.1.47**
 (pre-#6025), Psalm 6.x, Mago 1.19.0, Phan 6.x, NoVerify 0.5.5. Where a probe was
@@ -141,6 +142,222 @@ gaps in the raw sweep — e.g. `reconcile_non_empty_string`, `string_reconciliat
 3. **C3** — model the typed rest (`...<K,V>`) in ConstantArrayType.
 4. **C1** — constant-array subtraction on equality (independent, lower priority).
 
+## Part 4 — Non-ConstantArrayType PHPStan findings
+
+To answer "are there PHPStan gaps that do not involve `ConstantArrayType`?", a
+PHPStan-only sweep was run over a 322-case non-array sample of the Mago corpus
+(generics, callables, flow, scalars, inheritance, `issue_*`), phpstan-no-strict
+max, compared to the `@mago-expect` baseline. FP direction (PHPStan reports on
+mago-clean code) was the reliable signal; MISS direction produced mostly
+classifier artifacts (16 of 17 "misses" were actually reported under a code not
+yet mapped in `categories.json` — `method.childParameterType`, `clone.nonObject`,
+`assign.propertyProtectedSet`, `notIdentical.alwaysTrue`, …). Verified below with
+`\PHPStan\dumpType()`.
+
+### E1 (strong) — class-string identity comparison has no negative-branch narrowing
+
+PHPStan narrows the **positive** branch of a class-string identity check but does
+**not** narrow the **negative** (else / `match` default / `switch` default) branch
+— not even to subtract a `final` class that is fully excludable. This holds for
+every spelling: `$x::class === X::class`, `!==`, `get_class($x) === X::class`, and
+`$x::class === $y::class`. It is **comparison-specific**, not a general narrowing
+limit: `instanceof`, `is_a()`, `gettype()`, enum-case identity, and literal-scalar
+identity all narrow both directions. So the machinery exists; it is simply not
+wired for class-string identity.
+
+**Narrowing-symmetry matrix** (`if (cond) {POS} else {NEG}`, via `dumpType`):
+
+| comparison form | POS | NEG |
+| --------------- | --- | --- |
+| `$x instanceof A` | ✓ | ✓ |
+| `is_a($x, A::class)` | ✓ | ✓ |
+| `gettype($v) === 'integer'` | ✓ | ✓ |
+| enum `$e === E::X` | ✓ | ✓ |
+| literal `$s === 'a'` / `$i === 1` | ✓ | ✓ |
+| **`$x::class === A::class`** | ✓ | **✗ (keeps `A\|B`)** |
+| **`get_class($x) === A::class`** | ✓ | **✗** |
+| **`$x::class !== A::class`** | ✓ | **✗** |
+| **`$x::class === $y::class`** | ✓ | **✗** |
+| **backed enum `$e->value === 'p'`** | **✗** | **✗** (see E4) |
+
+The `gettype()` vs `::class` rows are the sharpest contrast — same shape of
+string-identity comparison, opposite outcome.
+
+```php
+final class A {} final class B {}
+function neg(A|B $x): void {
+    if ($x::class === A::class) { dumpType($x); }  // A   (positive: narrows)
+    else                        { dumpType($x); }  // A|B (negative: NOT narrowed; should be B)
+}
+function ctrl(A|B $x): void {
+    if ($x instanceof A) {} else { dumpType($x); } // B   (instanceof negative works)
+}
+```
+
+Real-world impact (Mago case `narrow_non_final_class_string_match`): in
+`match ($x::class) { C::class => …, A::class => …, B::class => …, default => $x }`
+and the equivalent `switch`, the `default` arm keeps `A|B|C`, producing
+false-positive `return.type` ("should return C but returns A|B|C") and
+`staticMethod.notFound`. Non-array; control-flow narrowing on class-string
+identity. **Belongs in the main cross-tool comparison table, not just as an edge
+case** — the `instanceof`/`is_a`/`gettype` contrast makes it a crisp issue.
+
+**Cross-tool note:** promoted to `regressions_class_string_negative_narrowing.php`.
+**PHPStan and Psalm** both fail to narrow the negative branch (`return.type` /
+`InvalidReturnType`+`InvalidReturnStatement`); **Mago and Phan** narrow to `B` and
+stay clean. So the split is PHPStan+Psalm vs. Mago+Phan (contrast with E4, which
+Mago also misses).
+
+### E2 (minor) — redundant final arm in a `match (true)` `is_*` chain not flagged
+
+```php
+function f(int|string|float $v): string {
+    return match (true) {
+        is_int($v)    => 'int',
+        is_float($v)  => 'float',
+        is_string($v) => $v,   // always true here; PHPStan is silent (Mago: redundant-type-comparison)
+    };
+}
+```
+
+PHPStan does not propagate earlier-arm exclusions into a later arm's condition, so
+the always-true final `is_string($v)` is not reported as already-narrowed. Genuine
+silence (verified), minor precision gap. Non-array.
+
+### E3 (gray / uncertain) — `@template T2 = T1` default not applied in the body
+
+`maybe_transform()` with `@template T2 = T1` returns `$value` (T1) where T2 is
+declared; PHPStan reports `return.type`. Treating template params as independent
+inside the body is defensible, so this is **not** asserted as a bug — recorded for
+consideration only.
+
+### E4 (medium, same family as E1) — backed-enum `->value` comparison does not narrow the case
+
+```php
+enum BE: string { case P = 'p'; case Q = 'q'; }
+function pos(BE $e): void { if ($e->value === 'p') { dumpType($e); } }        // BE   (want BE::P)
+function neg(BE $e): void { if ($e->value === 'p') {} else { dumpType($e); } } // BE   (want BE::Q)
+```
+
+A backed enum's case↔value mapping is a bijection, so `$e->value === 'p'`
+uniquely determines `$e === BE::P`. PHPStan narrows the case-identity form
+(`$e === E::X`, see matrix) but **neither** branch of the `->value` form — it does
+not use the value→case mapping. Same family as E1 (identity comparison whose
+narrowing is not propagated to the union). Non-array.
+
+**Cross-tool note (not PHPStan-specific):** promoting this to a conformance test
+(`regressions_backed_enum_value_narrowing.php`) showed that **PHPStan, Psalm, and
+Mago all share the gap** — a trailing single-arm `match ($s)` after
+`if ($s->value === 'H') return …` is flagged non-exhaustive by all three
+(`match.unhandled` / `UnhandledMatchCondition` / `match-not-exhaustive`). **Only
+Phan** treats it as exhaustive. All three narrow enum *case identity*
+(`$s === Suit::Hearts`); only the `->value` form is missed. So E4 is a common
+ecosystem gap, not a PHPStan-only one — unlike E1, where Mago and Phan both narrow
+and PHPStan/Psalm do not.
+
+### E5 (strong, same family as E1) — object union not narrowed by a discriminating property
+
+PHPStan narrows an **array-shape** discriminated union (`$a['tag'] === true` selects the
+matching shape) but not the **object** equivalent — neither by a property's type
+(`is_string($b->v)`) nor by a literal tag value (`$b->tag === true`). Not property-hook
+specific; plain typed properties reproduce it.
+
+```php
+class Str { public function __construct(public string $v) {} }
+class Flt { public function __construct(public float $v) {} }
+function f(Str|Flt $x): void {
+    if (is_string($x->v)) { dumpType($x); }  // Flt|Str  (want Str)
+    else                  { dumpType($x); }  // Flt|Str  (want Flt)
+}
+// literal-tag discriminated union — the classic pattern — also not narrowed:
+class TA { public true  $t = true; }
+class TB { public false $t = false; }
+function g(TA|TB $x): void { if ($x->t === true) { dumpType($x); } } // TA|TB (want TA)
+// array-shape control — DOES narrow:
+// array{tag:true,…}|array{tag:false,…} with $a['tag'] === true → each shape separately
+```
+
+The array-vs-object asymmetry is the crisp framing. Promoted to
+`regressions_object_property_discriminant_narrowing.php`: **PHPStan and Psalm** both fail
+(`return.type` / `InvalidReturnStatement`); **Mago and Phan** narrow — same split as E1.
+Found from Mago `issue_1093` (`test_property_narrowing`). Non-array (about objects).
+
+### E6 (MISS direction) — conflicting property types from two traits not detected
+
+`LeftTrait::$prop: string` + `RightTrait::$prop: int` composed into one class is a
+**PHP compile-time fatal**, yet PHPStan is fully silent. Psalm reports only an unrelated
+`MissingConstructor`; **Mago** (`incompatible-property-type`) and **Phan**
+(`PhanIncompatibleRealPropertyType`) detect the conflict. Promoted to
+`regressions_trait_property_type_conflict.php`. From Mago `trait_property_type_conflicts`.
+The one genuine MISS-direction gap surviving verification.
+
+**Methodology correction:** PHPStan emits trait-method diagnostics with a
+`path.php (in context of class X):LINE:` prefix, not `path.php:LINE:`. An earlier
+silence check grepped `path.php:` and so dropped those lines, falsely marking several cases
+"silent". Re-checked with `grep -F path.php`. In particular
+`inheritance_method_signature_through_trait_bad` (trait method whose param violates the
+implemented interface's LSP) **is** reported by PHPStan (`method.childParameterType`, in the
+using class's context) — **not** a gap. Only E2, E6, and `scalars_intdiv_by_zero`
+(literal `intdiv(x, 0)`) are truly PHPStan-silent among the 40 MISS; the other 37 are
+reported (many under codes the classifier lacked) or by design (uninitialized-on-read;
+`'foo' . true` is legal PHP so Mago is over-strict there).
+
+### Full non-array sweep — triage (1286 cases, improved classifier)
+
+34 FP + 40 MISS. After per-case verification the genuine, non-array, not-by-design PHPStan
+findings are E1, E2, E4, E5 (above). The rest resolve as:
+
+- **PHPStan is correct, Mago misses** — `issue_1045` (array_walk non-by-ref), `issue_1117`
+  (`filter_var(FILTER_SANITIZE_EMAIL)` → `string|false`), redundant-comparison /
+  already-narrowed reports (`scalars_*_compare`, `flow_switch_basic_narrow`, `is_array`/
+  `is_string` always-true), LSP contravariance (`method_signature_template_substitution`).
+- **By design** (unrecognized non-prefixed tags) — bare `@assert*` (`docblock_assert_*`),
+  bare `@type` aliases (`type_alias_*`, `docblock_self_referential_type_alias`). Same class
+  as D1.
+- **Mago-specific language features** — `partial_application_*` (6 cases); PHPStan does not
+  model Mago's partial application, so "MISS" is not meaningful.
+- **Mago over-strict / PHP-legal** — `scalars_bool_concat`, `strings_concat_with_bool_invalid`
+  (bool coerces to string in concatenation).
+- **Gray / conservative-by-design** — `issue_1089` (integer range upper bound widened to
+  `max` across a loop `++`), `template_default_references_other_template` (E3),
+  `callables_closure_bind_to_class` (`$this` type in an unbound closure — overlaps existing
+  [[20260708-pr4081-closure-bind-scope]]).
+- **Verified reported (were false MISS from classifier gaps)** — readonly writes
+  (`property.readOnlyAssignNotInConstructor`), PHP 8.4 asymmetric visibility
+  (`assign.propertyPrivateSet`) and property-hook contravariance
+  (`propertySetHook.nativeParameterType`), abstract instantiation (`new.abstract`), invalid
+  default values (`parameter.defaultValue`), undefined class const (`classConstant.notFound`)
+  — all now mapped in `categories.json`. PHPStan reports every one.
+- **By design (uninitialized-on-read)** — `classes_uninitialized_typed_property`,
+  `classes_constructor_no_body_required`, `trait_property_initialization`: PHPStan flags an
+  uninitialized typed property when it is *read*, not at declaration; Mago flags eagerly.
+- **Genuine MISS gaps** — only E2 (match-true redundant last arm ×2), E6 (trait property
+  type conflict), and `scalars_intdiv_by_zero`.
+
+### Excluded (by design or false signal)
+
+- **Bare `@type` alias** (`type_alias_complex_types`) — PHPStan uses
+  `@phpstan-type` / `@phpstan-import-type`; the non-prefixed `@type` is not a
+  recognized tag. By design, same class as D1's bare `@assert-if-true`.
+- **`issue_1045`** — `array_walk()` with a non-by-ref callback does not change the
+  array's value type, so `array<string,int>` stays and the declared
+  `array<string,string>` return is correctly flagged. **PHPStan is right; Mago
+  misses it.**
+- **16 of 17 MISS candidates** — PHPStan did report; the codes were simply
+  unmapped in `categories.json` (adding them: `method.childParameterType` →
+  argument-type, `clone.nonObject` → operand, `assign.propertyProtectedSet` →
+  assignment-type, `notIdentical.alwaysTrue`/`smaller.alwaysFalse` → narrowing,
+  `argument.missing`/`argument.unknown` → arity, `plus.leftNonNumeric` → operand,
+  `property.writeOnly` → assignment-type, `new.enum` → undefined-symbol).
+
+### Method notes
+
+- FP direction is the trustworthy signal; MISS needs the classifier map completed
+  first. Sweep covered a **1/4 sample (322 cases) × phpstan-no-strict only** — the
+  remaining 3/4 and strict rules likely hold more.
+- Both E1 and E2 are control-flow narrowing gaps (class-string identity, `match`
+  arm exclusion), a theme distinct from the `ConstantArrayType`/isList work.
+
 ## Appendix — provenance
 
 - Conformance repo: `/Users/megurine/repo/php/php-typing-conformance`
@@ -149,4 +366,11 @@ gaps in the raw sweep — e.g. `reconcile_non_empty_string`, `string_reconciliat
 - Mago corpus (source of B/C leads): `/Users/megurine/repo/rust/mago/crates/analyzer/tests/cases`
   (`@mago-expect` = per-case expected diagnostics; framework asserts zero
   *unexpected* issues).
-- Scratch dumpType experiments: `pstan-exp/{assert_forms,assert_prefixes,list_soundness,sealed,unsealed_parse}.php`.
+- Scratch dumpType experiments: `pstan-exp/{assert_forms,assert_prefixes,list_soundness,sealed,unsealed_parse}.php`
+  (Part 2) and `pstan-exp/{classneg,narrow_probe,narrowing_matrix,narrow_confirm,more_forms}.php`
+  (Part 4, incl. the E1 symmetry matrix and E4 backed-enum probe) and
+  `pstan-exp/{prop_discriminate,arr_vs_obj}.php` (E5 array-vs-object discriminant).
+- PHPStan-only sweep tool: `scratchpad/sweep_phpstan.php` (Mago baseline compare);
+  full run over 1286 non-array cases → `scratchpad/pstan-sweep-full.txt` (34 FP / 40 MISS).
+- Conformance regressions promoted this session: `regressions_{class_string_negative_narrowing,
+  backed_enum_value_narrowing,object_property_discriminant_narrowing}.php` (E1, E4, E5).
