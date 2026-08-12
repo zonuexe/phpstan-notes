@@ -1,0 +1,4 @@
+src/demo.php:139:Possibly impure call to function preg_match() in pure function EffectEnvelopeDemo\slug(). [identifier=possiblyImpure.functionCall]
+src/demo.php:150:Possibly impure call to function sort() in pure function EffectEnvelopeDemo\sortedCopy(). [identifier=possiblyImpure.functionCall]
+src/demo.php:162:Impure property assignment in pure method EffectEnvelopeDemo\MatchCache::extract(). [identifier=impure.propertyAssign]
+src/demo.php:162:Possibly impure call to function preg_match() in pure method EffectEnvelopeDemo\MatchCache::extract(). [identifier=possiblyImpure.functionCall]

@@ -1,0 +1,5 @@
+includes:
+	- /Users/megurine/repo/php/phpstan-src/.claude/worktrees/effect-envelope/conf/bleedingEdge.neon
+
+parameters:
+	level: 8
