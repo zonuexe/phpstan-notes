@@ -24,10 +24,11 @@ master にある。
 | [#309](https://github.com/rigortype/steins/pull/309) | `steins transform effects-envelope`(書き出し) | merged |
 | [#310](https://github.com/rigortype/steins/pull/310) | ドキュメント整合 + CHANGELOG | merged |
 | [#316](https://github.com/rigortype/steins/issues/316) / [#317](https://github.com/rigortype/steins/pull/317) | D-V2: `output` → `io.output` 族 + `io.input`(ADR-0083) | merged |
-| master 直コミット | ja 翻訳追随(`f0e63c5`)、Vocabulary evolution + pure 非停止性の規範化(`2973666`) | done |
+| master 直コミット | ja 翻訳追随(`f0e63c5`、D-V2 より前)、Vocabulary evolution + pure 非停止性の規範化(`2973666`、D-V2 の後) | done |
 
-全 PR で CI green(test linux/macos・rustdoc -D warnings・fp-gate・licenses・
-wasm)。fp-gate は公開 corpus に対して全段階で無影響だった。
+全 PR で CI green(test ubuntu・rustdoc -D warnings・fp-gate・licenses・wasm。
+macOS test は設計上 master 統合後のみ走り、両統合とも green)。fp-gate は
+公開 corpus に対して全段階で無影響だった。
 
 ## 2. 共有意味論として確定したもの(PHPStan 側と共有する決定)
 
