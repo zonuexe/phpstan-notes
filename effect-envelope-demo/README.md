@@ -4,22 +4,26 @@
 **宣言的な effect 上界(envelope)** として検査する試作
 (phpstan-src worktree `effect-envelope`、5 コミット)の動作デモ。
 
-- [src/demo.php](src/demo.php) — 注釈付きの単一ファイル。§1–§7 が各機能に対応
+- [src/demo.php](src/demo.php) — 注釈付きの単一ファイル。§1–§10 が各機能に対応
 - [output-phpstan-2.2.8-released.txt](output-phpstan-2.2.8-released.txt) — **リリース版 PHPStan 2.2.8** の出力
 - [output-default.txt](output-default.txt) — 試作ブランチ、デフォルト設定
-- [output-bleedingedge.txt](output-bleedingedge.txt) — 試作ブランチ + bleedingEdge
+- [output-envelope-only.txt](output-envelope-only.txt) — 試作ブランチ + `featureToggles.checkEffectEnvelopes: true` のみ
+- [output-bleedingedge.txt](output-bleedingedge.txt) — 試作ブランチ + bleedingEdge 全部
 
-## 3つの出力が語ること
+## 4つの出力が語ること
 
-### 1. リリース版 2.2.8(BC 実証)
+### 1. リリース版 2.2.8 と 2. 試作・デフォルト = **byte-for-byte 一致**(BC 実証)
 
-パースエラーもタグ警告も**ゼロ**。全ラベル付きタグは無害に無視され、出るのは
-従来からある 4 件だけ — `preg_match`/`sort` の by-ref 偽陽性 3 件と、正しい
-`impure.propertyAssign` 1 件。**既存の PHPStan に対してこのタグは今日から書ける。**
+`diff output-default.txt output-phpstan-2.2.8-released.txt` は**空**。
+stage 11 で envelope 検査が `checkEffectEnvelopes` toggle(default false)配下に
+移ったため、試作ブランチのデフォルト出力はリリース版と完全一致する。
+出るのは従来からの 4 件のみ(`preg_match`/`sort` の by-ref 偽陽性 3 件 +
+正しい `impure.propertyAssign`)。**parser 互換は無条件、意味論は opt-in** —
+既存の PHPStan に対してこのタグは今日から書け、書いても何も変わらない。
 
-### 2. 試作・デフォルト設定(stage 1–3、opt-in なしで安全)
+### 2.5 試作 + `checkEffectEnvelopes` のみ(提案の最小 ask)
 
-リリース版の 4 件に加えて envelope 検査 3 件:
+envelope 検査 + 語彙診断(fail-open 対策で連動)が有効化され 11 件:
 
 | 行 | finding | 意味 |
 |---|---|---|

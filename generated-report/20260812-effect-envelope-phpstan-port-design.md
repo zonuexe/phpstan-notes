@@ -381,7 +381,24 @@ stage 4 の許容スキップが先、メッセージ選択が後。toggle off �
 | 8 | **D-U1**: ラベル付き uncertain point の envelope 検査(possibly 級)。stage 5 の「uncertain は検査しない」契約の改訂 | 検査対象の拡大(ただしラベル保持点のみ) | **コミット済 `dedef5872`** |
 | 9 | **敵対的レビュー対応**: builtin カタログの soundness 修正 + 同梱狭化 extension | カタログ値変更 + 新 extension 1 | **コミット済 `c3d89f0fd`** |
 | 10 | **D-V2 語彙移行**: `output` → `io.output.{buffer,stdout,stderr,header}` + `io.input`、`fwrite(STDOUT/STDERR)` ConstFetch 狭化 | 語彙のクリーン変更(エイリアスなし) | **コミット済 `d3aa74c8a`** |
-| 11 | `-except`、Memcached.stub、effect-parametric 宣言(opaque callable)、遅延起動 extension 同梱判断、P2 責務分割リファクタ、Steins 側語彙同期([提案書](20260812-steins-vocab-sync-proposal.md)) | — | 予約のみ |
+| 11 | **docs レビュー P1-1 対応**: `checkEffectEnvelopes` toggle(enforcement opt-in 化 + InvalidEffectLabelsRule 連動) | 新 toggle。default 出力が stock 2.2.x と byte 一致に | **コミット済 `d1064a7da`** |
+| 12 | `-except`、Memcached.stub、effect-parametric 宣言(opaque callable)、遅延起動 extension 同梱判断、P2 責務分割リファクタ、Steins 側同期([語彙](20260812-steins-vocab-sync-proposal.md)/[カタログ](20260812-steins-catalog-soundness-proposal.md)) | — | 予約のみ |
+
+### 6.9 stage 11 実装記録(2026-08-12、docs レビュー対応)
+
+**stage 11 (`d1064a7da`)** — enforcement の opt-in 化:
+- 全 envelope finding(`*.effectOutsideEnvelope` / `method.envelopeWidened`)を
+  `checkEffectEnvelopes`(default false / bleedingEdge true)配下へ。Liskov は
+  `reportMethodPurityOverride && checkEffectEnvelopes` の二重条件。
+- fail-open 対策(レビュー P2): enforcement ON は `InvalidEffectLabelsRule` を連動有効化
+  (`reportInvalidEffectLabels || checkEffectEnvelopes`)。
+- **決定的検証**: pre-feature base(`git archive f69c88168`)を実体化して同一 fixture・
+  同一設定で比較 — **branch default 出力は stock 2.2.x と byte-for-byte 一致**。
+  デモでも `diff output-default.txt output-phpstan-2.2.8-released.txt` が空。
+  「parser 互換は無条件、意味論は opt-in」が実装と主張の両方で成立。
+- デモに `envelope.neon`(checkEffectEnvelopes のみ = issue draft の最小 ask 構成)を追加、
+  4系統キャプチャに。full `make tests` 21,421 グリーン、red チェック 4 系統。
+- issue draft v2 の PHPStan pin を `d1064a7da` で確定。
 
 ### 6.8 stage 10 実装記録(2026-08-12)
 
