@@ -25,10 +25,13 @@ Koka の別名より強い進化特性を持つ — 粗い宣言の意味が「�
 なく設計特性であり、**仕様に明文で書くべき**(下記 §3 の `-except` との相互作用も
 この特性から導かれる)。
 
-出典: Daan Leijen, "Koka: Programming with Row Polymorphic Effect Types"
-(MSFP 2014); Koka 言語ドキュメント(koka-lang.github.io)の `std/core` 効果
-別名。効果システムの起源として Lucassen & Gifford, "Polymorphic Effect
-Systems" (POPL 1988)。
+出典: Daan Leijen,
+[Koka: Programming with Row Polymorphic Effect Types](https://arxiv.org/abs/1406.2061)
+(MSFP 2014, EPTCS 153, DOI 10.4204/EPTCS.153.8);
+[Koka 言語ドキュメント](https://koka-lang.github.io/koka/doc/book.html)の
+`std/core` 効果別名。効果システムの起源として Lucassen & Gifford,
+[Polymorphic Effect Systems](https://dl.acm.org/doi/10.1145/73560.73564)
+(POPL 1988)。
 
 ## 2. bare `io` ⊇ output の裁定は Koka の `io` と字義どおり一致する
 
@@ -37,7 +40,8 @@ Koka の `io` 別名は **`console` を含む**。つまり「io と言ったら
 最も実績のある効果システムの既定と同一。write-up でこの一文を出典付きで言えると、
 「独自の判断」ではなく「前例への収束」として提示できる。
 
-出典: Koka std/core の `io` 別名定義(console を含む)。
+出典: [Koka std/core の `io` 別名定義](https://koka-lang.github.io/koka/doc/book.html)
+(console を含む)。
 
 ## 3. `-except`(補集合上界)は開放語彙と相性が悪い — #312 に書き足すべき原則
 
@@ -54,10 +58,11 @@ Gaster & Jones 以来、開放行と lacks の組み合わせは健全に定義�
 実装する日が来たら、「除外は書いた時点の語彙でなく**評価時点の語彙**に対して
 解釈される」ことを仕様に明記する(そしてそれが採用の主障壁であることも)。
 
-出典: Benedict R. Gaster & Mark P. Jones, "A Polymorphic Type System for
-Extensible Records and Variants" (Technical Report NOTTCS-TR-96-3, 1996);
-Magnus Madsen & Jaco van de Pol, "Polymorphic Types and Effects with Boolean
-Unification" (OOPSLA 2020)。
+出典: Benedict R. Gaster & Mark P. Jones,
+[A Polymorphic Type System for Extensible Records and Variants](https://web.cecs.pdx.edu/~mpj/pubs/polyrec.html)
+(Technical Report NOTTCS-TR-96-3, 1996); Magnus Madsen & Jaco van de Pol,
+[Polymorphic Types and Effects with Boolean Unification](https://dl.acm.org/doi/10.1145/3428222)
+(OOPSLA 2020)。
 
 ## 4. `pure` は停止性を主張しない — checker が purity で何をしてよいかを仕様に
 
@@ -72,7 +77,10 @@ Koka は非停止を効果 `div` として追跡し、`total` は「効果なし
 まさにこの区別のために語彙を分けている(Koka の `pure` は歴史的に
 `<exn,div>` を含む別名で、total と区別される)。
 
-出典: Koka ドキュメントの `total`/`div`/`pure` の区別; Leijen (POPL 2017)。
+出典: [Koka ドキュメント](https://koka-lang.github.io/koka/doc/book.html)の
+`total`/`div`/`pure` の区別; Daan Leijen,
+[Type Directed Compilation of Row-Typed Algebraic Effects](https://dl.acm.org/doi/10.1145/3093333.3009872)
+(POPL 2017)。
 
 ## 5. `mutate.local` の理論的根拠は runST の被包化定理と同型
 
@@ -84,9 +92,10 @@ region 内 mutation が region を出れば pure と見なされるのも同じ�
 `hasSideEffects` 節にこの一文を足すと、「二度拒否されたフラグの代替」が場当たり
 でなく定理の実装であることが伝わる。
 
-出典: John Launchbury & Simon Peyton Jones, "Lazy Functional State Threads"
-(PLDI 1994); Koka の `st` 効果と分離; Flix のリージョンとスコープ付き
-mutation(doc.flix.dev)。
+出典: John Launchbury & Simon Peyton Jones,
+[Lazy Functional State Threads](https://dl.acm.org/doi/10.1145/178243.178246)
+(PLDI 1994); Koka の `st` 効果と分離;
+[Flix のリージョンとスコープ付き mutation](https://doc.flix.dev/)。
 
 ## 6. 条件付き purity タグ = 効果多相の一階エンコーディング
 
@@ -98,8 +107,11 @@ PHPDoc で書ける範囲に落としたもの。仕様がこの対応を一言�
 効果)は trait メソッドの効果をインスタンス側で決めさせる仕組みで、interface
 envelope + Liskov の将来形として参考になる。
 
-出典: Madsen & van de Pol (OOPSLA 2020); Matthew Lutze & Magnus Madsen,
-"Associated Effects" (PLDI 2024); Flix ドキュメントの効果多相の例。
+出典: Madsen & van de Pol
+([OOPSLA 2020](https://dl.acm.org/doi/10.1145/3428222)); Matthew Lutze &
+Magnus Madsen,
+[Associated Effects: Flexible Abstractions for Effectful Programming](https://dl.acm.org/doi/10.1145/3656393)
+(PLDI 2024); [Flix ドキュメント](https://doc.flix.dev/)の効果多相の例。
 
 ## 7. マスキング境界の前例: Koka `mask` の制限版
 
@@ -112,8 +124,10 @@ mask の健全性は**全経路で** handler(ob_get_clean 系)に到達するこ
 例外・early return で ob スタックが閉じない経路が 1 本でもあれば差し引けない —
 これが §5.11 の「領域解析 or HOF 注釈」の二択の理論的な出どころ。
 
-出典: Daan Leijen, "Type Directed Compilation of Row-Typed Algebraic Effects"
-(POPL 2017 — inject/mask の形式化); Koka ドキュメントの `mask`。
+出典: Daan Leijen,
+[Type Directed Compilation of Row-Typed Algebraic Effects](https://dl.acm.org/doi/10.1145/3093333.3009872)
+(POPL 2017 — inject/mask の形式化);
+[Koka ドキュメント](https://koka-lang.github.io/koka/doc/book.html)の `mask`。
 
 ## 8. ベンダー・ルート付き意味ラベルは「名前付き効果インスタンス」の静的版
 
@@ -125,9 +139,10 @@ mask の健全性は**全経路で** handler(ob_get_clean 系)に到達するこ
 させる案(`acme.db.…connection.master` → 効果)を評価するときは、この文献群が
 「インスタンス識別を型システムでどこまで運べるか」の限界を示していて参考になる。
 
-出典: Ningning Xie, Youyou Cong, Kazuki Ikemori, Daan Leijen, "First-Class
-Names for Effect Handlers" (OOPSLA 2022); 能力ベースの近縁として
-Boruch-Gruszecki, Odersky et al., "Capturing Types" (TOPLAS 2023)。
+出典: Ningning Xie, Youyou Cong, Kazuki Ikemori, Daan Leijen,
+[First-Class Names for Effect Handlers](https://dl.acm.org/doi/10.1145/3563289)
+(OOPSLA 2022); 能力ベースの近縁として Boruch-Gruszecki, Odersky et al.,
+[Capturing Types](https://dl.acm.org/doi/10.1145/3618003) (TOPLAS 2023)。
 
 ## 9. Open question 1(固定語彙 vs 開放語彙)への推奨回答
 
@@ -147,7 +162,8 @@ bound を足すだけ、非網羅は沈黙)は Koka/Flix の「推論が既定�
 文書」と同じ側にあり、これは堅持する価値がある。upstream 議論で「全関数に
 書かせるのか」という反応が来たときの応答としてこの節を用意しておく。
 
-出典: Anders Hejlsberg のインタビュー "The Trouble with Checked Exceptions"
+出典: Anders Hejlsberg のインタビュー
+[The Trouble with Checked Exceptions](https://www.artima.com/articles/the-trouble-with-checked-exceptions)
 (Artima, 2003)が最も引用される定式化。学術的には検査例外は効果システムの
 一種(Lucassen-Gifford 系)であり、失敗は理論でなくエルゴノミクスにあった、
 という整理が共通理解。
