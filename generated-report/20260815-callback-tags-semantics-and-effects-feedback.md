@@ -163,6 +163,67 @@ void 戻り値ヒューリスティック(§3 の落とし穴)は envelope の�
 effect 関連のフィクスチャは **非 void 戻り値**で書くか、void の場合は
 `pureFunction.void` / `function.resultUnused` を明示的に期待値に含める。
 
+## 4.5 `@pure-unless-callable-is-impure` と `@pure-unless-parameter-passed` は統合できるか
+
+PR #3482 と #6018 の 2 タグを 1 つに畳めないか検討した。**結論: タグとしては統合すべきでない。
+ただし effect envelope の「効果多相」という上位概念では括れる。**
+
+### 決定的な差: 引数の「中身」を見るか、「有無」だけを見るか
+
+実測(PR #6018 ブランチ `915ecf02b`、level 10 + bleedingEdge):
+
+| ケース | 結果 |
+|---|---|
+| callable 版・引数を**省略** | pure |
+| callable 版・**pure な callable を渡す** | **pure のまま** |
+| passed 版・引数を**省略** | pure |
+| passed 版・**引数を渡す** | **Impure(確定)** |
+
+| | callable 版 (#3482) | passed 版 (#6018) |
+|---|---|---|
+| 判定対象 | 渡された**値の純度**(`getCallableParametersAcceptors()->isPure()`) | 引数の**存在**のみ |
+| pure な引数を渡したら | pure のまま | impure |
+| verdict の値域 | Yes / No / **Maybe**(opaque callable) | Yes / No のみ |
+| 対象パラメータ | callable | by-ref out |
+
+**引数を渡した時の意味が正反対**(callable 版は「渡してよい、中身が pure なら」/ passed 版は「渡したら負け」)。
+単一タグに畳むと表現力を失う。
+
+### 「1 タグ + パラメータ型で自動判別」も成立しない
+
+`@pure-unless $x` に統一してパラメータ型(callable か by-ref か)で意味を切り替える案も破綻する:
+
+- **by-ref callable パラメータ**(`callable &$cb`)が存在し得て、どちらの意味か決定不能。
+- 値域が違う(callable 版は Maybe を返すが passed 版は Yes/No のみ)ため、同一タグ名だと
+  ユーザーが "possibly impure" の理由を理解できない。
+- `preg_replace_callback` は**両方を同時に必要とする**(callback の純度 AND count の有無)。
+  1 タグでは片方しか表現できない。
+
+### 統合は既に「機構レベル」で完了している
+
+タグを畳む代わりに、実装側では既に統合が済んでいる:
+
+- phpdoc-parser の value node が完全同型(`parameterName` + `description`、実測確認済み)。
+- functionMetadata で `preg_replace_callback` が両フラグを併用(shape も `@var` に追加済み)。
+- **verdict 合成**(`915ecf02b`): `TrinaryLogic::and()` で 2 つの verdict を単一判定へ集約。
+  `SimpleImpurePoint::createFromVariant()` と `NewHandler` の両方。
+
+つまり「**2 つのタグ、1 つの判定機構**」という形に整理済みで、これが妥当な到達点。
+
+### 本当の統合先は effect envelope(F1 の具体化)
+
+両者は「この関数の効果は**引数に依存する**」という effect 多相の 2 実例であり、
+envelope なら「**何の効果か**」と「**何に依存するか**」を分離して表現できる:
+
+```
+@phpstan-impure effects-of($cb)            // callable 版: $cb の効果を継承(依存 = 引数の中身)
+@phpstan-impure mutate if-passed($count)   // passed 版: 渡された時だけ mutate(依存 = 引数の有無)
+```
+
+`preg_replace_callback` のような複合ケースも 1 行で自然に書ける。
+stage 13 の effect-parametric 宣言を設計する際、**依存の種類が最低 2 つある**(値の効果 / 引数の有無)
+ことを前提にする必要がある。
+
 ## 5. アクションアイテム
 
 1. stage 13 の「effect-parametric 宣言(opaque callable)」設計時に **F1 の軸選択**(出どころであってタイミングでない)を前提として明記する。
@@ -171,3 +232,5 @@ effect 関連のフィクスチャは **非 void 戻り値**で書くか、void 
 4. **F4** の二重経路合流点を v1 実装中に決める(verdict 経路推奨)。
 5. ~~§3 の保持経路の穴を実測~~ → 完了。superglobal / static は検出、**by-ref 配列 push は検出されない**。
    envelope では `mutate` として表現できるので、この差を提案文書の動機づけに使える。
+6. **§4.5**: effect-parametric 宣言の設計時、依存の種類が最低 2 つある(**値の効果** / **引数の有無**)
+   ことを前提にする。2 タグを 1 つに畳む方向には進めない(意味が正反対で表現力を失う)。
