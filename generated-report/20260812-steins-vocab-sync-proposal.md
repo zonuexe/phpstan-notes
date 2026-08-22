@@ -1,5 +1,9 @@
 # Steins レジストリ同期変更案: D-V2 語彙移行(output → io.output 族 + io.input)
 
+> **STATUS: 適用済み(2026-08-12)** — steins #316/#317(`2973666` 時点で master に反映、
+> ADR-0083 として記録)。さらにレビュー対応の仕様 hardening(`a7d3f02`)、
+> scoped-invalidation 注記(`c968d5b`)、hasSideEffects 分解 narrative(`94b4b7a`)が続いた。
+
 PHPStan 側 stage 10 と対になる Steins 側の変更案。適用先は rigortype/steins。
 背景と根拠は [20260812-effect-extension-api-design.md](20260812-effect-extension-api-design.md) §5.11(D-V2)。
 **まだ何も適用していない — このドキュメントは提案であり、着手はユーザー判断。**

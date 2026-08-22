@@ -330,6 +330,32 @@ resource provenance 不要 — 引数が `STDOUT`/`STDERR` の ConstFetch であ
   境界を prefix として運ぶ)。`io.output.stdout` / `io.output.stderr` / `io.output.header` は
   ob_start で捕獲できないため、マスキングの対象外であることが階層から機械的に決まる。
 
+## 5.12 Steins `2f59dcae`→`735d350` 反映(2026-08-12)
+
+Steins 側のレビュー対応・カタログ修正着地に伴う相互反映の記録:
+
+- **D-L1 の昇格**: interop 仕様が「Trust models for bounds on abstractions」節を得て、
+  PHPStan の選択(contract with substitutability = call-site 信頼 + Liskov 包含)と
+  Steins の選択(hint without proof = unchecked stratum)を**どちらも正当な選択肢**として
+  規範化した。D-L1 は「仕様からの乖離」ではなく「仕様が提示する2択のうち
+  PHPStan-native な側の選択」に格上げ。
+- **仕様に informative 節「Beyond envelope checks: labels inside the engine」追加**
+  (`c968d5b`/`94b4b7a`): invalidation keys(remembering/forgetting の scoped 無効化 —
+  stat 由来の記憶は `io.fs`/`global.write` だけが無効化、`nondet.random` は保持)と
+  discardability keys(read-shaped effects + 空 throw 集合 → 破棄された呼び出しは
+  dead statement; `#[\NoDiscard]` は「効果もあり結果も本題」の象限だけの宣言に縮む)。
+  **新裁定2件**: `io.input` は破棄不可(ストリーム位置が進む)、`mutate.local` は
+  **call site では**破棄不可(`sort($rows);` は呼び出し元可視の変異のために呼ぶ)—
+  callee の pure envelope が許容することとの区別。PHPStan 側では将来 stage
+  (scoped forgetting / no-effect 系ルールの label 化)の設計素材。
+- **stat 族の意図的不採用**: Steins は `file_exists`/`is_file`/`is_dir`/`scandir` を
+  wrapper-capable として `io` に置いたが、PHPStan では metadata-pure
+  (`hasSideEffects=false`、value-remembering の前提)= impure point が立たず
+  ラベルは死にコード。この model 差は hasSideEffects の分解(上記 informative 節の
+  方向)が解くまで divergence として記録。
+- **逆輸入(stage 12)**: `clearstatcache` → `global.write`、`fpassthru` → `io`、
+  `fread`/`fgets` の `STDIN` 定数狭化 → `io.input`。
+
 ## 6. 決定事項と divergence
 
 - **D-E1(Steins ADR-0064 からの意図的乖離)**: Steins は「第6の拡張機構」を拒否し

@@ -382,7 +382,19 @@ stage 4 の許容スキップが先、メッセージ選択が後。toggle off �
 | 9 | **敵対的レビュー対応**: builtin カタログの soundness 修正 + 同梱狭化 extension | カタログ値変更 + 新 extension 1 | **コミット済 `c3d89f0fd`** |
 | 10 | **D-V2 語彙移行**: `output` → `io.output.{buffer,stdout,stderr,header}` + `io.input`、`fwrite(STDOUT/STDERR)` ConstFetch 狭化 | 語彙のクリーン変更(エイリアスなし) | **コミット済 `d3aa74c8a`** |
 | 11 | **docs レビュー P1-1 対応**: `checkEffectEnvelopes` toggle(enforcement opt-in 化 + InvalidEffectLabelsRule 連動) | 新 toggle。default 出力が stock 2.2.x と byte 一致に | **コミット済 `d1064a7da`** |
-| 12 | `-except`、Memcached.stub、effect-parametric 宣言(opaque callable)、遅延起動 extension 同梱判断、P2 責務分割リファクタ、Steins 側同期([語彙](20260812-steins-vocab-sync-proposal.md)/[カタログ](20260812-steins-catalog-soundness-proposal.md)) | — | 予約のみ |
+| 12 | **Steins 4f0efa3 逆輸入**: clearstatcache→global.write / fpassthru→io / STDIN 定数狭化→io.input(fpassthru(STDIN) は +io.output.buffer) | カタログ純追加 2 + extension 1 ケース | **コミット済 `1c6b2318f`** |
+| 13 | `-except`、Memcached.stub、effect-parametric 宣言(opaque callable)、遅延起動 extension 同梱判断、P2 責務分割リファクタ、scoped forgetting / discardability keys(仕様 informative 節の PHPStan 実装) | — | 予約のみ |
+
+### 6.10 stage 12 実装記録(2026-08-12、Steins 同期)
+
+Steins 側は提案書2本(語彙 #316/#317、カタログ soundness #318/#319)を**全面適用済み**。
+逆輸入 3 点を stage 12(`1c6b2318f`)で反映: `clearstatcache` は metadata 不在(Maybe)だが
+void 返却で certain 昇格、`fpassthru(STDIN)` は指示の `io.input` 単独を**エージェントが
+soundness 理由で拒否**し `io.input, io.output.buffer` に(relay 半分を bound に残す —
+readfile 前例)。stat 族の io 化は意図的不採用(metadata-pure との model 差、
+API design doc §5.12)。full `make tests` 21,421 グリーン(baseline 一致)、red チェック
+2 系統。既知の残件: 生成器の既存クラッシュ由来で committed 生成物が pinned stubs に
+対し 3 エントリ drift(`ob_get_level` ほか — 本ブランチと無関係、別 issue 候補)。
 
 ### 6.9 stage 11 実装記録(2026-08-12、docs レビュー対応)
 

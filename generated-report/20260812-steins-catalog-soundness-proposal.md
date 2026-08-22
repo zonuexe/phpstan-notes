@@ -1,5 +1,10 @@
 # Steins カタログ soundness 修正案(レビュー P1-2 対応)
 
+> **STATUS: 適用済み(2026-08-12)** — steins `4f0efa3` "Sound stream-provenance defaults
+> with literal-target narrowing (#318)"、PR #319 でマージ。本案の内容はほぼそのまま
+> 実装され、さらに stat/unlink 族の wrapper-capable 扱いと STDIN 定数狭化が追加された。
+> PHPStan 側への逆輸入(clearstatcache/fpassthru/STDIN)は stage 12 で対応。
+
 [docs レビュー](20260812-effect-label-docs-adversarial-review.md) P1-2 への Steins 側対応案。
 PHPStan 側は stage 9(`c3d89f0fd`)で修正済み — 本案はその鏡。適用はユーザー判断。
 
