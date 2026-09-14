@@ -1,0 +1,51 @@
+negzero.php:10:Dumped type: '-0'|'0'
+negzero.php:10:Dumped type: -0.0
+negzero.php:10:Dumped type: 0
+negzero.php:10:Dumped type: true
+negzero.php:10:Dumped type: true
+negzero.php:10:Strict comparison using === between -0.0 and 0.0 will always evaluate to true. [identifier=identical.alwaysTrue]
+negzero.php:10:Strict comparison using === between 0.0 and -0.0 will always evaluate to true. [identifier=identical.alwaysTrue]
+negzero.php:11:Binary operation "/" between 1 and -0.0 results in an error. [identifier=binaryOp.invalid]
+negzero.php:11:Comparison operation "<" between -0.0 and 0.0 is always false. [identifier=smaller.alwaysFalse]
+negzero.php:11:Dumped type: *ERROR*
+negzero.php:11:Dumped type: false
+negzero.php:11:Dumped type: true
+negzero.php:11:Loose comparison using == between -0.0 and 0.0 will always evaluate to true. [identifier=equal.alwaysTrue]
+negzero.php:12:Dumped type: '-0'|'0'
+negzero.php:12:Dumped type: -0.0
+negzero.php:14:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+negzero.php:15:Dumped type: *NEVER*
+negzero.php:15:Strict comparison using === between NAN|float<[-inf, 0.0)>|float<(0.0, inf]> and -0.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+negzero.php:16:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+negzero.php:18:Dumped type: 0.0
+negzero.php:19:Dumped type: *NEVER*
+negzero.php:19:Dumped type: float<[-inf, 0.0)>
+negzero.php:19:Strict comparison using === between float<[-inf, 0.0)> and -0.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+negzero.php:21:Parameter #1 $u of function ProbeNegZero\takesPositive expects float<(0.0, 1.0]>, float given. [identifier=argument.type]
+negzero.php:22:Parameter #1 $u of function ProbeNegZero\takesNegative expects float<[-1.0, 0.0)>, float given. [identifier=argument.type]
+negzero.php:24:Parameter #1 $u of function ProbeNegZero\takesPositive expects float<(0.0, 1.0]>, float given. [identifier=argument.type]
+negzero.php:26:Parameter #1 $u of function ProbeNegZero\takesPositive expects float<(0.0, 1.0]>, float given. [identifier=argument.type]
+negzero.php:27:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, float given. [identifier=argument.type]
+negzero.php:29:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, float given. [identifier=argument.type]
+negzero.php:30:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, float given. [identifier=argument.type]
+negzero.php:32:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, int given. [identifier=argument.type]
+negzero.php:33:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, true given. [identifier=argument.type]
+negzero.php:34:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, string given. [identifier=argument.type]
+negzero.php:35:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, string given. [identifier=argument.type]
+negzero.php:36:Parameter #1 $u of function ProbeNegZero\takesUnit expects float<0.0, 1.0>, null given. [identifier=argument.type]
+negzero.php:38:Function ProbeNegZero\nextUp() returns void but does not have any side effects. [identifier=void.pure]
+negzero.php:41:Dumped type: float<(0.0, 1.0)>
+negzero.php:42:Dumped type: 5.0E-324
+negzero.php:43:Dumped type: 0.9999999999999999
+negzero.php:44:Dumped type: *NEVER*
+negzero.php:44:Strict comparison using === between float<5.0E-324, 0.9999999999999999> and 0.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+negzero.php:45:Dumped type: *NEVER*
+negzero.php:45:Strict comparison using === between float<5.0E-324, 0.9999999999999999> and 1.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+negzero.php:48:Dumped type: float<5.0E-324, 0.9999999999999999>
+negzero.php:50:PHPDoc tag @var with type 1.7976931348623157E+308 is not subtype of native type 0.5. [identifier=varTag.nativeType]
+negzero.php:51:Dumped type: 1.7976931348623157E+308
+negzero.php:54:Dumped type: float<(-inf, inf)>
+negzero.php:55:Dumped type: *NEVER*
+negzero.php:55:Strict comparison using === between float<(-inf, inf)> and INF will always evaluate to false. [identifier=identical.alwaysFalse]
+negzero.php:56:Dumped type: float<(-inf, inf)>
+negzero.php:57:Dumped type: float<(-inf, inf)>

@@ -1,0 +1,93 @@
+syntax-param.php:5:Dumped type: float<-inf, inf>
+syntax-param.php:6:Dumped type: mixed
+syntax-param.php:6:Function ProbeSyntax\s02() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:6:PHPDoc tag @param has invalid value (float<-inf, 1.0> $x): Unexpected token "-inf,", expected type at offset 17 on line 1 [identifier=phpDoc.parseError]
+syntax-param.php:7:Dumped type: float<1.0, inf>
+syntax-param.php:8:Dumped type: mixed
+syntax-param.php:8:Function ProbeSyntax\s04() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:8:PHPDoc tag @param has invalid value (float<, 1.0> $x): Unexpected token ",", expected type at offset 17 on line 1 [identifier=phpDoc.parseError]
+syntax-param.php:9:Dumped type: float<1.0, 2.0>
+syntax-param.php:10:Dumped type: *NEVER*
+syntax-param.php:10:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:11:Dumped type: float<0.001, 1000.0>
+syntax-param.php:12:Dumped type: float<-1.5, 2.0>
+syntax-param.php:13:Dumped type: float<0.0, 100.0>
+syntax-param.php:14:Dumped type: 0.1
+syntax-param.php:15:Dumped type: *NEVER*
+syntax-param.php:15:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:16:Dumped type: mixed
+syntax-param.php:16:Function ProbeSyntax\s11() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:16:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:17:Dumped type: mixed
+syntax-param.php:17:Function ProbeSyntax\s12() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:17:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:18:Dumped type: mixed
+syntax-param.php:18:Function ProbeSyntax\s13() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:18:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:19:Dumped type: float<0.0, inf>
+syntax-param.php:20:Dumped type: mixed
+syntax-param.php:20:Function ProbeSyntax\s15() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:20:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:21:Dumped type: float<0.0, inf>
+syntax-param.php:22:Dumped type: mixed
+syntax-param.php:22:Function ProbeSyntax\s17() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:22:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:23:Dumped type: mixed
+syntax-param.php:23:Function ProbeSyntax\s18() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:23:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:24:Dumped type: mixed
+syntax-param.php:24:Function ProbeSyntax\s19() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:24:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:25:Dumped type: *NEVER*
+syntax-param.php:25:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:26:Dumped type: 0.0
+syntax-param.php:27:Dumped type: mixed
+syntax-param.php:27:Function ProbeSyntax\s22() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:27:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:28:Dumped type: mixed
+syntax-param.php:28:Function ProbeSyntax\s23() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:28:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:29:Dumped type: INF
+syntax-param.php:30:Dumped type: mixed
+syntax-param.php:30:Function ProbeSyntax\s25() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:30:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:31:Dumped type: NAN|float<0.0, 1.0>
+syntax-param.php:32:Dumped type: float<0.0, 1.0>
+syntax-param.php:33:Dumped type: float<0.0, 1.0>
+syntax-param.php:34:Dumped type: float<-1000.5, 1000.5>
+syntax-param.php:35:Dumped type: float<0.5, 1.0>
+syntax-param.php:36:Dumped type: float<-inf, inf>
+syntax-param.php:37:Dumped type: float<-inf, inf>
+syntax-param.php:38:Dumped type: float<(0.0, 1.0)>
+syntax-param.php:39:Dumped type: mixed
+syntax-param.php:39:Function ProbeSyntax\s35() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:39:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:40:Dumped type: float<9007199254740992.0, 9007199254740996.0>
+syntax-param.php:41:Dumped type: mixed
+syntax-param.php:41:Function ProbeSyntax\s37() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:41:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:42:Dumped type: int<0, 20>
+syntax-param.php:43:Dumped type: *NEVER*
+syntax-param.php:43:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:44:Dumped type: float<[0.0, 1.0)>
+syntax-param.php:45:Dumped type: float<[-1.0, 0.0)>
+syntax-param.php:46:Dumped type: array<float<0.0, 1.0>>
+syntax-param.php:47:Dumped type: list<float<(0.0, 1.0)>>
+syntax-param.php:48:Dumped type: float<(0.0, 1.0]>
+syntax-param.php:49:Dumped type: *NEVER*
+syntax-param.php:49:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:50:Dumped type: float<(-inf, inf]>
+syntax-param.php:51:Dumped type: 0.0
+syntax-param.php:52:Dumped type: float<-inf, 0.0>
+syntax-param.php:53:Dumped type: float<[0.0, 1.0)>|float<(1.0, 2.0]>
+syntax-param.php:54:Dumped type: mixed
+syntax-param.php:54:Function ProbeSyntax\s50() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:54:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:55:Dumped type: mixed
+syntax-param.php:55:Function ProbeSyntax\s51() has parameter $x with no type specified. [identifier=missingType.parameter]
+syntax-param.php:55:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]
+syntax-param.php:60:Dumped type: float<0.0, 1.0>
+syntax-param.php:61:Default value of the parameter #1 $x (float) of method ProbeSyntax\WithConst::withDefault() is incompatible with type float<0.0, 1.0>. [identifier=parameter.defaultValue]
+syntax-param.php:61:Dumped type: float<0.0, 1.0>
+syntax-param.php:62:Dumped type: float<0.0, 1.0>
+syntax-param.php:63:Dumped type: float<0.0, 1.0>

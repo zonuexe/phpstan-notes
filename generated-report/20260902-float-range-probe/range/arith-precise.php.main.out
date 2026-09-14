@@ -1,0 +1,52 @@
+arith-precise.php:11:Function ProbeArithPrecise\d() has parameter $mr with no type specified. [identifier=missingType.parameter]
+arith-precise.php:11:Function ProbeArithPrecise\d() has parameter $sym with no type specified. [identifier=missingType.parameter]
+arith-precise.php:11:Function ProbeArithPrecise\d() has parameter $u with no type specified. [identifier=missingType.parameter]
+arith-precise.php:11:Function ProbeArithPrecise\d() has parameter $unit with no type specified. [identifier=missingType.parameter]
+arith-precise.php:11:PHPDoc tag @param for parameter $mr contains unresolvable type. [identifier=parameter.unresolvableType]
+arith-precise.php:11:PHPDoc tag @param for parameter $sym contains unresolvable type. [identifier=parameter.unresolvableType]
+arith-precise.php:11:PHPDoc tag @param for parameter $u contains unresolvable type. [identifier=parameter.unresolvableType]
+arith-precise.php:11:PHPDoc tag @param for parameter $unit contains unresolvable type. [identifier=parameter.unresolvableType]
+arith-precise.php:13:Dumped type: float
+arith-precise.php:14:Dumped type: float
+arith-precise.php:15:Dumped type: float
+arith-precise.php:16:Dumped type: float
+arith-precise.php:17:Dumped type: float
+arith-precise.php:18:Dumped type: float
+arith-precise.php:19:Dumped type: float
+arith-precise.php:20:Dumped type: float
+arith-precise.php:21:Dumped type: float
+arith-precise.php:22:Dumped type: float
+arith-precise.php:23:Dumped type: float
+arith-precise.php:24:Dumped type: float
+arith-precise.php:25:Dumped type: float
+arith-precise.php:26:Dumped type: float
+arith-precise.php:27:Dumped type: numeric-string&uppercase-string
+arith-precise.php:29:Dumped type: (float|int)
+arith-precise.php:30:Dumped type: float
+arith-precise.php:31:Dumped type: (float|int)
+arith-precise.php:32:Dumped type: (float|int)
+arith-precise.php:33:Dumped type: (float|int)
+arith-precise.php:34:Dumped type: 0
+arith-precise.php:35:Dumped type: (float|int)
+arith-precise.php:36:Dumped type: (float|int)
+arith-precise.php:37:Dumped type: (float|int)
+arith-precise.php:38:Dumped type: float|int
+arith-precise.php:39:Dumped type: (float|int)
+arith-precise.php:40:Dumped type: (float|int)
+arith-precise.php:41:Dumped type: float|int
+arith-precise.php:42:Dumped type: (float|int)
+arith-precise.php:43:Dumped type: (float|int)
+arith-precise.php:44:Dumped type: float
+arith-precise.php:45:Dumped type: float
+arith-precise.php:46:Dumped type: float
+arith-precise.php:47:Dumped type: float
+arith-precise.php:48:Dumped type: float
+arith-precise.php:49:Dumped type: float
+arith-precise.php:50:Dumped type: mixed
+arith-precise.php:51:Dumped type: mixed
+arith-precise.php:52:Dumped type: mixed
+arith-precise.php:53:Dumped type: mixed
+arith-precise.php:54:Dumped type: float
+arith-precise.php:55:Dumped type: float
+arith-precise.php:68:Function ProbeArithPrecise\alwaysFalseBug2() has parameter $x with no type specified. [identifier=missingType.parameter]
+arith-precise.php:68:PHPDoc tag @param for parameter $x contains unresolvable type. [identifier=parameter.unresolvableType]

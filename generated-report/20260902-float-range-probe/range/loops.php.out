@@ -1,0 +1,21 @@
+loops.php:8:Dumped type: float
+loops.php:10:Function ProbeLoops\l2() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:11:Dumped type: float<[-inf, 1.0)>
+loops.php:12:Dumped type: NAN|float<1.0, inf>
+loops.php:14:Function ProbeLoops\l3() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:16:Dumped type: float
+loops.php:17:Dumped type: NAN|float<-inf, 0.0>
+loops.php:19:Function ProbeLoops\l4() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:21:Dumped type: NAN|float<[-inf, 0.1)>|float<(0.1, 0.2)>|float<(0.2, 0.3)>|float<(0.3, 0.4)>|float<(0.4, 0.5)>|float<(0.5, 0.6)>|float<(0.6, 0.7)>|float<(0.7, 0.8)>|float<(0.8, 0.9)>|float<(0.9, 1.0)>|float<(1.0, 1.1)>|float<(1.1, 1.2)>|float<(1.2, 1.3)>|float<(1.3, 1.4)>|float<(1.4, 1.5)>|float<(1.5, 1.6)>|float<(1.6, 1.7)>|float<(1.7, 1.8)>|float<(1.8, 1.9)>|float<(1.9, 2.0)>|float<(2.0, inf]>
+loops.php:23:Function ProbeLoops\l4i() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:25:Dumped type: int<min, 0>|int<21, max>
+loops.php:27:Function ProbeLoops\l5() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:29:Dumped type: float
+loops.php:30:Dumped type: float
+loops.php:36:Dumped type: float
+loops.php:39:Dumped type: float<0.0, 1.0>
+loops.php:41:Function ProbeLoops\l7() returns void but does not have any side effects. [identifier=void.pure]
+loops.php:44:Dumped type: 0.6000000000000001
+loops.php:47:Dumped type: 2.5
+loops.php:52:Dumped type: float
+loops.php:57:Dumped type: float

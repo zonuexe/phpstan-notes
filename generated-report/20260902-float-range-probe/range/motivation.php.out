@@ -1,0 +1,89 @@
+motivation.php:12:Dumped type: float
+motivation.php:12:Dumped type: int<0, 20>
+motivation.php:13:Dumped type: float
+motivation.php:13:Dumped type: int<1, 11>
+motivation.php:14:Dumped type: float
+motivation.php:15:Dumped type: float<-1.0, 0.0>
+motivation.php:15:Dumped type: int<-10, 0>
+motivation.php:16:Dumped type: float<0.0, 1.0>
+motivation.php:16:Dumped type: int<0, 10>
+motivation.php:17:Dumped type: float
+motivation.php:17:Dumped type: float
+motivation.php:18:Dumped type: float
+motivation.php:18:Dumped type: float
+motivation.php:19:Dumped type: float
+motivation.php:19:Dumped type: float
+motivation.php:19:Dumped type: float
+motivation.php:20:Dumped type: float<0.0, 0.5>
+motivation.php:20:Dumped type: float<0.5, 1.0>
+motivation.php:20:Dumped type: int<0, 5>
+motivation.php:20:Dumped type: int<5, 10>
+motivation.php:21:Dumped type: float<0.0, 1.0>
+motivation.php:21:Dumped type: float<0.0, 1.0>|int<0, 1>
+motivation.php:21:Parameter #1 ...$arg1 of function max expects non-empty-array, list<float<0.0, 1.0>> given. [identifier=argument.type]
+motivation.php:22:Dumped type: int<0, 10>
+motivation.php:22:Dumped type: int<0, 1>
+motivation.php:23:Dumped type: 0|float
+motivation.php:23:Dumped type: float|int
+motivation.php:24:Dumped type: float
+motivation.php:24:Dumped type: float
+motivation.php:24:Dumped type: float
+motivation.php:24:Dumped type: float|int<0, 5>
+motivation.php:25:Dumped type: float
+motivation.php:25:Dumped type: float
+motivation.php:25:Dumped type: int<0, 100>
+motivation.php:26:Dumped type: float
+motivation.php:26:Dumped type: float
+motivation.php:26:Dumped type: float
+motivation.php:26:Dumped type: float
+motivation.php:27:Dumped type: float
+motivation.php:27:Dumped type: float
+motivation.php:27:Dumped type: float
+motivation.php:28:Dumped type: 0
+motivation.php:28:Dumped type: float
+motivation.php:28:Dumped type: int
+motivation.php:29:Dumped type: bool
+motivation.php:29:Dumped type: float
+motivation.php:29:Dumped type: float<0.0, 1.0>
+motivation.php:29:Dumped type: numeric-string&uppercase-string
+motivation.php:29:Dumped type: true
+motivation.php:30:Dumped type: int<-1, 1>
+motivation.php:31:Comparison operation "<" between float<0.0, 1.0> and 2.0 is always true. [identifier=smaller.alwaysTrue]
+motivation.php:31:Comparison operation ">" between float<0.0, 1.0> and 2.0 is always false. [identifier=greater.alwaysFalse]
+motivation.php:31:Comparison operation ">=" between float<0.0, 1.0> and 0.0 is always true. [identifier=greaterOrEqual.alwaysTrue]
+motivation.php:31:Dumped type: bool
+motivation.php:31:Dumped type: bool
+motivation.php:31:Dumped type: false
+motivation.php:31:Dumped type: false
+motivation.php:31:Dumped type: true
+motivation.php:31:Dumped type: true
+motivation.php:31:Strict comparison using === between float<0.0, 1.0> and 2.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+motivation.php:32:Dumped type: float
+motivation.php:33:Dumped type: float
+motivation.php:34:Dumped type: int<5, 15>
+motivation.php:35:Dumped type: (float|int)
+motivation.php:36:Dumped type: float
+motivation.php:37:Dumped type: float
+motivation.php:38:Dumped type: float
+motivation.php:39:Dumped type: float
+motivation.php:40:Dumped type: float
+motivation.php:41:Dumped type: float<0.0, 1.0>
+motivation.php:42:Dumped type: 1
+motivation.php:43:Dumped type: -INF
+motivation.php:43:Dumped type: 3.141592653589793
+motivation.php:43:Dumped type: INF
+motivation.php:43:Dumped type: NAN
+motivation.php:43:Dumped type: float
+motivation.php:43:Dumped type: float
+motivation.php:43:Dumped type: float
+motivation.php:43:Dumped type: float
+motivation.php:44:Dumped type: array{0.0, 0.25, 0.5, 0.75, 1.0}
+motivation.php:45:Dumped type: list<float>
+motivation.php:46:Dumped type: (float|int<1, max>)
+motivation.php:53:Function ProbeMotivation\half() should return float<0.0, 0.5> but returns float. [identifier=return.type]
+motivation.php:62:Function ProbeMotivation\clamp2() should return float<0.0, 1.0> but returns float. [identifier=return.type]
+motivation.php:66:Function ProbeMotivation\fromInt() should return float<0.0, 1.0> but returns float|int<0, 1>. [identifier=return.type]
+motivation.php:69:Function ProbeMotivation\intHalf() should return int<0, 10> but returns int. [identifier=return.type]
+motivation.php:74:Dumped type: float
+motivation.php:75:Dumped type: float
+motivation.php:76:Dumped type: int

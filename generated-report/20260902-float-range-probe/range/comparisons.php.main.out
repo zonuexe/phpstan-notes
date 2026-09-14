@@ -1,0 +1,173 @@
+comparisons.php:12:Function ProbeCompare\c() has parameter $nonNan with no type specified. [identifier=missingType.parameter]
+comparisons.php:12:Function ProbeCompare\c() has parameter $two with no type specified. [identifier=missingType.parameter]
+comparisons.php:12:Function ProbeCompare\c() has parameter $u with no type specified. [identifier=missingType.parameter]
+comparisons.php:12:PHPDoc tag @param for parameter $nonNan contains unresolvable type. [identifier=parameter.unresolvableType]
+comparisons.php:12:PHPDoc tag @param for parameter $two contains unresolvable type. [identifier=parameter.unresolvableType]
+comparisons.php:12:PHPDoc tag @param for parameter $u contains unresolvable type. [identifier=parameter.unresolvableType]
+comparisons.php:13:Dumped type: float
+comparisons.php:13:Dumped type: float
+comparisons.php:13:Dumped type: int
+comparisons.php:13:Dumped type: int
+comparisons.php:14:Dumped type: float
+comparisons.php:14:Dumped type: float
+comparisons.php:14:Dumped type: float|int
+comparisons.php:14:Dumped type: float|int
+comparisons.php:15:Dumped type: float
+comparisons.php:15:Dumped type: float
+comparisons.php:15:Dumped type: numeric-string
+comparisons.php:15:Dumped type: numeric-string
+comparisons.php:16:Dumped type: float
+comparisons.php:16:Dumped type: float
+comparisons.php:16:Dumped type: float|null
+comparisons.php:16:Dumped type: float|null
+comparisons.php:17:Dumped type: bool
+comparisons.php:17:Dumped type: bool
+comparisons.php:17:Dumped type: float
+comparisons.php:17:Dumped type: float
+comparisons.php:18:Dumped type: float
+comparisons.php:18:Dumped type: float
+comparisons.php:18:Dumped type: mixed
+comparisons.php:18:Dumped type: mixed
+comparisons.php:19:Dumped type: float
+comparisons.php:19:Dumped type: float
+comparisons.php:19:Dumped type: string
+comparisons.php:19:Dumped type: string
+comparisons.php:20:Dumped type: float
+comparisons.php:20:Dumped type: float
+comparisons.php:20:Dumped type: int
+comparisons.php:20:Dumped type: int
+comparisons.php:21:Dumped type: *NEVER*
+comparisons.php:21:Dumped type: float
+comparisons.php:21:Strict comparison using === between float and int will always evaluate to false. [identifier=identical.alwaysFalse]
+comparisons.php:22:Dumped type: float
+comparisons.php:22:Dumped type: float
+comparisons.php:23:Dumped type: float
+comparisons.php:23:Dumped type: float
+comparisons.php:24:Dumped type: float
+comparisons.php:24:Dumped type: float
+comparisons.php:25:Dumped type: float
+comparisons.php:25:Dumped type: float
+comparisons.php:26:Dumped type: 0.0
+comparisons.php:26:Dumped type: float
+comparisons.php:27:Dumped type: 0.0
+comparisons.php:27:Dumped type: float
+comparisons.php:28:Dumped type: 0.0
+comparisons.php:28:Dumped type: float
+comparisons.php:29:Dumped type: 0.0
+comparisons.php:29:Dumped type: float
+comparisons.php:30:Dumped type: 0.0
+comparisons.php:30:Dumped type: float
+comparisons.php:31:Dumped type: int<-1, 1>
+comparisons.php:32:Dumped type: float
+comparisons.php:32:Dumped type: float
+comparisons.php:33:Dumped type: float
+comparisons.php:33:Dumped type: float
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:35:Dumped type: float
+comparisons.php:35:Dumped type: float
+comparisons.php:35:Dumped type: mixed
+comparisons.php:35:Dumped type: mixed~null
+comparisons.php:36:Dumped type: float
+comparisons.php:36:Dumped type: float
+comparisons.php:36:Dumped type: mixed
+comparisons.php:36:Dumped type: mixed
+comparisons.php:37:Dumped type: float
+comparisons.php:37:Dumped type: float
+comparisons.php:37:Dumped type: mixed
+comparisons.php:37:Dumped type: mixed~null
+comparisons.php:38:Dumped type: mixed
+comparisons.php:38:Dumped type: mixed~null
+comparisons.php:39:Dumped type: mixed~(0.0|int<min, 0>|false|null)
+comparisons.php:39:Dumped type: mixed~(int<1, max>|true)
+comparisons.php:40:Dumped type: mixed
+comparisons.php:40:Dumped type: mixed
+comparisons.php:41:Dumped type: 2.0
+comparisons.php:41:Dumped type: mixed~2.0
+comparisons.php:42:Dumped type: mixed
+comparisons.php:42:Dumped type: mixed
+comparisons.php:43:Dumped type: mixed
+comparisons.php:43:Dumped type: mixed
+comparisons.php:44:Dumped type: mixed
+comparisons.php:44:Dumped type: mixed
+comparisons.php:45:Dumped type: mixed
+comparisons.php:45:Dumped type: mixed~null
+comparisons.php:46:Dumped type: mixed
+comparisons.php:46:Dumped type: mixed
+comparisons.php:47:Dumped type: mixed
+comparisons.php:47:Dumped type: mixed
+comparisons.php:48:Dumped type: float
+comparisons.php:49:Dumped type: float
+comparisons.php:49:Dumped type: float
+comparisons.php:50:Dumped type: float
+comparisons.php:51:Dumped type: float
+comparisons.php:51:Dumped type: float
+comparisons.php:52:Dumped type: *NEVER*
+comparisons.php:52:Dumped type: float
+comparisons.php:52:Loose comparison using != between float and float will always evaluate to false. [identifier=notEqual.alwaysFalse]
+comparisons.php:53:Dumped type: *NEVER*
+comparisons.php:53:Dumped type: float
+comparisons.php:53:Strict comparison using !== between float and float will always evaluate to false. [identifier=notIdentical.alwaysFalse]
+comparisons.php:54:Dumped type: *NEVER*
+comparisons.php:54:Dumped type: float
+comparisons.php:54:Strict comparison using === between float and float will always evaluate to true. [identifier=identical.alwaysTrue]
+comparisons.php:55:Dumped type: float
+comparisons.php:55:Dumped type: float
+comparisons.php:56:Dumped type: float|int<1, max>
+comparisons.php:56:Dumped type: float|int<min, 0>
+comparisons.php:57:Dumped type: float
+comparisons.php:57:Dumped type: float|null
+comparisons.php:58:Dumped type: float
+comparisons.php:58:Dumped type: float|null
+comparisons.php:59:Dumped type: float
+comparisons.php:59:Dumped type: float
+comparisons.php:59:Dumped type: mixed
+comparisons.php:59:Dumped type: mixed~null
+comparisons.php:60:Dumped type: mixed~(0.0|bool|int<0, max>|null)
+comparisons.php:60:Dumped type: mixed~int<min, -1>
+comparisons.php:61:Dumped type: mixed
+comparisons.php:61:Dumped type: mixed
+comparisons.php:62:Dumped type: 0.5
+comparisons.php:62:Dumped type: mixed~0.5
+comparisons.php:63:Dumped type: float
+comparisons.php:63:Dumped type: float
+comparisons.php:64:Dumped type: float
+comparisons.php:64:Dumped type: float
+comparisons.php:65:Dumped type: float
+comparisons.php:65:Dumped type: float
+comparisons.php:66:Dumped type: float
+comparisons.php:66:Dumped type: float
+comparisons.php:67:Dumped type: float
+comparisons.php:67:Dumped type: float
+comparisons.php:68:Dumped type: float
+comparisons.php:68:Dumped type: float
+comparisons.php:69:Dumped type: INF
+comparisons.php:69:Dumped type: float
+comparisons.php:70:Dumped type: NAN
+comparisons.php:70:Dumped type: float
+comparisons.php:71:Dumped type: NAN
+comparisons.php:71:Dumped type: float
+comparisons.php:72:Dumped type: NAN
+comparisons.php:72:Dumped type: float
+comparisons.php:73:Dumped type: float
+comparisons.php:73:Dumped type: float
+comparisons.php:74:Dumped type: int<9007199254740993, max>
+comparisons.php:74:Dumped type: int<min, 9007199254740992>
+comparisons.php:75:Dumped type: float
+comparisons.php:75:Dumped type: float
+comparisons.php:76:Dumped type: float
+comparisons.php:76:Dumped type: float
+comparisons.php:77:Dumped type: float
+comparisons.php:81:Match expression does not handle remaining value: true [identifier=match.unhandled]
+comparisons.php:87:Function ProbeCompare\matchExhaustiveRange() has parameter $u with no type specified. [identifier=missingType.parameter]
+comparisons.php:87:PHPDoc tag @param for parameter $u contains unresolvable type. [identifier=parameter.unresolvableType]
+comparisons.php:88:Match expression does not handle remaining value: true [identifier=match.unhandled]
+comparisons.php:98:Strict comparison using !== between float and float will always evaluate to false. [identifier=notIdentical.alwaysFalse]
+comparisons.php:99:Strict comparison using === between float and float will always evaluate to true. [identifier=identical.alwaysTrue]
+comparisons.php:100:Loose comparison using == between float and float will always evaluate to true. [identifier=equal.alwaysTrue]
+comparisons.php:101:PHPDoc tag @var for variable $u contains unresolvable type. [identifier=varTag.unresolvableType]
+comparisons.php:102:PHPDoc tag @var with type mixed is not subtype of native type float. [identifier=varTag.nativeType]
+comparisons.php:109:Strict comparison using !== between mixed and mixed will always evaluate to false. [identifier=notIdentical.alwaysFalse]

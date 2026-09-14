@@ -1,0 +1,110 @@
+arith-union.php:12:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:13:Dumped type: float
+arith-union.php:13:Dumped type: float
+arith-union.php:13:Dumped type: float
+arith-union.php:13:Dumped type: int<-2, 2>
+arith-union.php:16:Dumped type: float
+arith-union.php:16:Dumped type: float
+arith-union.php:16:Dumped type: float
+arith-union.php:16:Dumped type: float
+arith-union.php:16:Dumped type: float<[-inf, 0.0)>
+arith-union.php:18:Dumped type: float
+arith-union.php:18:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-union.php:18:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-union.php:18:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-union.php:18:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-union.php:18:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-union.php:18:Dumped type: float<-3.0, -2.0>|float<[-1.0, 0.0)>
+arith-union.php:18:Dumped type: int<0, 3>
+arith-union.php:18:Dumped type: numeric-string&uppercase-string
+arith-union.php:18:Dumped type: true
+arith-union.php:19:Dumped type: float
+arith-union.php:19:Dumped type: float
+arith-union.php:19:Dumped type: float
+arith-union.php:19:Dumped type: float
+arith-union.php:20:Dumped type: float<-1.0, 0.0>|int<5, 6>
+arith-union.php:20:Dumped type: float<0.0, 1.0>|int<10, 12>
+arith-union.php:20:Dumped type: float<0.0, 1.0>|int<5, 6>
+arith-union.php:20:Dumped type: float<0.0, 1.0>|int<5, 6>
+arith-union.php:20:Dumped type: float<0.0, 1.0>|int<6, 7>
+arith-union.php:20:Dumped type: int<0, 1>|int<5, 6>
+arith-union.php:21:Dumped type: NAN|float<-inf, 1.0>
+arith-union.php:21:Dumped type: NAN|float<0.0, inf>
+arith-union.php:21:Dumped type: float<-inf, 1.0>
+arith-union.php:21:Dumped type: float<0.0, 1.0>
+arith-union.php:21:Dumped type: float<0.0, 1.0>
+arith-union.php:21:Dumped type: float<0.0, inf>
+arith-union.php:22:Dumped type: float
+arith-union.php:22:Dumped type: float
+arith-union.php:22:Dumped type: float
+arith-union.php:23:Dumped type: 2147483647|9223372036854775807
+arith-union.php:23:Dumped type: 4|8
+arith-union.php:23:Dumped type: float
+arith-union.php:23:Dumped type: float
+arith-union.php:24:Dumped type: float
+arith-union.php:25:Dumped type: float|false
+arith-union.php:26:Dumped type: float
+arith-union.php:27:Dumped type: float
+arith-union.php:28:Dumped type: float
+arith-union.php:29:Call to function is_finite() with float<0.0, 1.0> will always evaluate to true. [identifier=function.alreadyNarrowedType]
+arith-union.php:29:Call to function is_infinite() with float<0.0, 1.0> will always evaluate to false. [identifier=function.impossibleType]
+arith-union.php:29:Call to function is_nan() with float<0.0, 1.0> will always evaluate to false. [identifier=function.impossibleType]
+arith-union.php:29:Dumped type: bool
+arith-union.php:29:Dumped type: bool
+arith-union.php:29:Dumped type: bool
+arith-union.php:30:Dumped type: -INF|INF|NAN
+arith-union.php:30:Dumped type: float<(-inf, inf)>
+arith-union.php:33:Dumped type: NAN
+arith-union.php:33:Dumped type: array{float}
+arith-union.php:34:Dumped type: array{NAN}
+arith-union.php:34:Dumped type: float
+arith-union.php:35:Dumped type: NAN
+arith-union.php:35:Dumped type: array{float}
+arith-union.php:36:Dumped type: array{NAN}
+arith-union.php:36:Dumped type: float
+arith-union.php:37:Dumped type: NAN
+arith-union.php:37:Dumped type: array{float}
+arith-union.php:38:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-union.php:38:Dumped type: array{0.0}
+arith-union.php:39:Dumped type: 0.0
+arith-union.php:39:Dumped type: array{float}
+arith-union.php:40:Dumped type: array{float}
+arith-union.php:40:Dumped type: float
+arith-union.php:41:Dumped type: array{float}
+arith-union.php:41:Dumped type: float
+arith-union.php:42:Dumped type: array{float}
+arith-union.php:42:Dumped type: float
+arith-union.php:43:Dumped type: 1.0|NAN
+arith-union.php:43:Dumped type: array{NAN|float<[-inf, 1.0)>|float<(1.0, inf]>}
+arith-union.php:44:Dumped type: NAN
+arith-union.php:44:Dumped type: array{*NEVER*}
+arith-union.php:44:Loose comparison using == between NAN and NAN will always evaluate to true. [identifier=equal.alwaysTrue]
+arith-union.php:45:Dumped type: NAN
+arith-union.php:46:Dumped type: 0.5|1.5
+arith-union.php:46:Dumped type: array{NAN|float<[-inf, 0.5)>|float<(0.5, 1.5)>|float<(1.5, inf]>}
+arith-union.php:47:Dumped type: 0.5|1.5
+arith-union.php:47:Dumped type: array{NAN|float<[-inf, 0.5)>|float<(0.5, 1.5)>|float<(1.5, inf]>}
+arith-union.php:50:Function ProbeArith\intRangeParity() has parameter $u with no type specified. [identifier=missingType.parameter]
+arith-union.php:51:Dumped type: bool
+arith-union.php:51:Dumped type: bool
+arith-union.php:51:Dumped type: false
+arith-union.php:51:Dumped type: false
+arith-union.php:51:Dumped type: int<-1, 1>
+arith-union.php:51:Dumped type: int<-1, 1>
+arith-union.php:51:Loose comparison using == between int<0, 1> and 2 will always evaluate to false. [identifier=equal.alwaysFalse]
+arith-union.php:51:Loose comparison using == between int<0, 1> and 2.0 will always evaluate to false. [identifier=equal.alwaysFalse]
+arith-union.php:52:Dumped type: *NEVER*
+arith-union.php:52:Dumped type: mixed
+arith-union.php:52:Loose comparison using == between int<0, 1> and 2 will always evaluate to false. [identifier=equal.alwaysFalse]
+arith-union.php:53:Dumped type: int
+arith-union.php:54:Comparison operation "<=" between 0 and 0 is always true. [identifier=smallerOrEqual.alwaysTrue]
+arith-union.php:54:Dumped type: 'a'|'b'
+arith-union.php:55:Dumped type: 'a'|'b'
+arith-union.php:55:Match expression does not handle remaining value: true [identifier=match.unhandled]
+arith-union.php:56:Dumped type: 'a'|'b'|'c'

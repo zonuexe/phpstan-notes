@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<psalm errorLevel="1" resolveFromConfigFile="true" cacheDirectory="/private/tmp/claude-501/-Users-megurine-repo-php-phpstan-src/57c31198-af9c-47de-b856-bda8e5738efb/scratchpad/probes-range/tmp-psalm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://getpsalm.org/schema/config">
+  <projectFiles><file name="psalm-src.php"/></projectFiles>
+</psalm>

@@ -1,0 +1,48 @@
+arith-precise.php:13:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:14:Dumped type: float
+arith-precise.php:15:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:16:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:17:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:18:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:19:Dumped type: float
+arith-precise.php:20:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:21:Dumped type: float
+arith-precise.php:22:Dumped type: float
+arith-precise.php:23:Dumped type: float
+arith-precise.php:24:Dumped type: NAN|float<(0.0, inf]>
+arith-precise.php:25:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:26:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+arith-precise.php:27:Dumped type: 'NAN'|(numeric-string&uppercase-string)
+arith-precise.php:29:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-precise.php:30:Dumped type: float
+arith-precise.php:31:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-precise.php:32:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-precise.php:33:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-precise.php:34:Dumped type: 0.0
+arith-precise.php:35:Dumped type: float<(0.0, 1.0]>|float<2.0, 3.0>
+arith-precise.php:36:Dumped type: float<0.0, 1.0>|int<6, 7>
+arith-precise.php:37:Dumped type: float<0.0, 1.0>|int<10, 12>
+arith-precise.php:38:Dumped type: float<-1.0, 0.0>|int<5, 6>
+arith-precise.php:39:Dumped type: float<0.0, 1.0>|int<4, 5>
+arith-precise.php:40:Dumped type: 3|float
+arith-precise.php:41:Dumped type: float<-1.0, 1.0>|int<-1, 1>
+arith-precise.php:42:Dumped type: float<-1.0, 1.0>|int<0, 2>
+arith-precise.php:43:Dumped type: float<-1.0, 1.0>|int<-1, 1>
+arith-precise.php:44:Dumped type: float<0.0, inf>
+arith-precise.php:45:Dumped type: NAN|float<0.0, inf>
+arith-precise.php:46:Dumped type: NAN|float<-inf, 1.0>
+arith-precise.php:47:Dumped type: float<-inf, 1.0>
+arith-precise.php:48:Dumped type: float<0.0, 1.0>
+arith-precise.php:49:Dumped type: float<0.0, 1.0>
+arith-precise.php:50:Dumped type: NAN|float<0.0, inf>
+arith-precise.php:51:Dumped type: float<0.0, inf>
+arith-precise.php:52:Dumped type: float<-inf, 1.0>
+arith-precise.php:53:Dumped type: float<0.0, 1.0>
+arith-precise.php:54:Dumped type: float
+arith-precise.php:55:Dumped type: float
+arith-precise.php:62:Strict comparison using === between NAN|float<[-inf, 0.0)>|float<(0.0, inf]> and 0.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+arith-precise.php:64:Strict comparison using === between NAN|float<[-inf, 0.0)>|float<(0.0, inf]> and 0.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+arith-precise.php:68:Function ProbeArithPrecise\alwaysFalseBug2() returns void but does not have any side effects. [identifier=void.pure]
+arith-precise.php:70:Strict comparison using === between float<-1.0, 0.0>|int<5, 6> and -5 will always evaluate to false. [identifier=identical.alwaysFalse]
+arith-precise.php:72:Strict comparison using === between float<0.0, 1.0>|int<6, 7> and 1.5 will always evaluate to false. [identifier=identical.alwaysFalse]
+arith-precise.php:76:Call to function is_nan() with float<0.0, 1.0> will always evaluate to false. [identifier=function.impossibleType]

@@ -1,0 +1,180 @@
+comparisons.php:13:Dumped type: float
+comparisons.php:13:Dumped type: float
+comparisons.php:13:Dumped type: int
+comparisons.php:13:Dumped type: int
+comparisons.php:14:Dumped type: float
+comparisons.php:14:Dumped type: float
+comparisons.php:14:Dumped type: float|int
+comparisons.php:14:Dumped type: float|int
+comparisons.php:15:Dumped type: float
+comparisons.php:15:Dumped type: float
+comparisons.php:15:Dumped type: numeric-string
+comparisons.php:15:Dumped type: numeric-string
+comparisons.php:16:Dumped type: float
+comparisons.php:16:Dumped type: float
+comparisons.php:16:Dumped type: float|null
+comparisons.php:16:Dumped type: float|null
+comparisons.php:17:Dumped type: bool
+comparisons.php:17:Dumped type: bool
+comparisons.php:17:Dumped type: float
+comparisons.php:17:Dumped type: float
+comparisons.php:18:Dumped type: float
+comparisons.php:18:Dumped type: float
+comparisons.php:18:Dumped type: mixed
+comparisons.php:18:Dumped type: mixed
+comparisons.php:19:Dumped type: float
+comparisons.php:19:Dumped type: float
+comparisons.php:19:Dumped type: string
+comparisons.php:19:Dumped type: string
+comparisons.php:20:Dumped type: float
+comparisons.php:20:Dumped type: float
+comparisons.php:20:Dumped type: int
+comparisons.php:20:Dumped type: int
+comparisons.php:21:Dumped type: *NEVER*
+comparisons.php:21:Dumped type: float
+comparisons.php:21:Strict comparison using === between float and int will always evaluate to false. [identifier=identical.alwaysFalse]
+comparisons.php:22:Dumped type: float
+comparisons.php:22:Dumped type: float
+comparisons.php:23:Dumped type: float
+comparisons.php:23:Dumped type: float
+comparisons.php:24:Dumped type: float
+comparisons.php:24:Dumped type: float
+comparisons.php:25:Dumped type: float
+comparisons.php:25:Dumped type: float
+comparisons.php:26:Dumped type: 0.0
+comparisons.php:26:Dumped type: float
+comparisons.php:27:Dumped type: 0.0
+comparisons.php:27:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+comparisons.php:28:Dumped type: 0.0
+comparisons.php:28:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+comparisons.php:29:Dumped type: 0.0
+comparisons.php:29:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+comparisons.php:30:Dumped type: 0.0
+comparisons.php:30:Dumped type: NAN|float<[-inf, 0.0)>|float<(0.0, inf]>
+comparisons.php:31:Dumped type: int<-1, 1>
+comparisons.php:32:Dumped type: float
+comparisons.php:32:Dumped type: float
+comparisons.php:33:Dumped type: float
+comparisons.php:33:Dumped type: float
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:34:Dumped type: int<-1, 1>
+comparisons.php:35:Dumped type: NAN|float<0.0, inf>
+comparisons.php:35:Dumped type: float<0.0, 1.0>
+comparisons.php:35:Dumped type: float<0.0, 1.0>
+comparisons.php:35:Dumped type: float<[-inf, 1.0)>
+comparisons.php:36:Dumped type: NAN|float<-inf, 1.0>
+comparisons.php:36:Dumped type: float<(0.0, inf]>
+comparisons.php:36:Dumped type: float<0.0, 1.0>
+comparisons.php:36:Dumped type: float<0.0, 1.0>
+comparisons.php:37:Dumped type: float
+comparisons.php:37:Dumped type: float<-inf, inf>
+comparisons.php:37:Dumped type: float<-inf, inf>
+comparisons.php:37:Dumped type: float<[-inf, inf)>
+comparisons.php:38:Dumped type: float<(-inf, inf)>
+comparisons.php:38:Dumped type: float<-inf, inf>
+comparisons.php:39:Dumped type: float<0.5, 1.0>
+comparisons.php:39:Dumped type: float<[0.0, 0.5)>
+comparisons.php:40:Dumped type: 0.5
+comparisons.php:40:Dumped type: float<[0.0, 0.5)>|float<(0.5, 1.0]>
+comparisons.php:41:Dumped type: *NEVER*
+comparisons.php:41:Dumped type: float<0.0, 1.0>
+comparisons.php:41:Strict comparison using === between float<0.0, 1.0> and 2.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+comparisons.php:42:Dumped type: float<0.0, 1.0>
+comparisons.php:42:Dumped type: float<0.0, 1.0>
+comparisons.php:43:Dumped type: float<0.0, 1.0>
+comparisons.php:43:Dumped type: float<0.0, 1.0>
+comparisons.php:44:Comparison operation "<" between float<0.0, 1.0> and float<2.0, 3.0> is always true. [identifier=smaller.alwaysTrue]
+comparisons.php:44:Dumped type: *NEVER*
+comparisons.php:44:Dumped type: float<0.0, 1.0>
+comparisons.php:45:Comparison operation ">" between float<0.0, 1.0> and float<2.0, 3.0> is always false. [identifier=greater.alwaysFalse]
+comparisons.php:45:Dumped type: *NEVER*
+comparisons.php:45:Dumped type: float<0.0, 1.0>
+comparisons.php:46:Dumped type: *NEVER*
+comparisons.php:46:Dumped type: float<0.0, 1.0>
+comparisons.php:47:Dumped type: *NEVER*
+comparisons.php:47:Dumped type: float<0.0, 1.0>
+comparisons.php:47:Strict comparison using === between float<0.0, 1.0> and float<2.0, 3.0> will always evaluate to false. [identifier=identical.alwaysFalse]
+comparisons.php:48:Comparison operation "<" between float<(1.0, inf]> and 0 is always false. [identifier=smaller.alwaysFalse]
+comparisons.php:48:Dumped type: *NEVER*
+comparisons.php:48:Result of && is always false. [identifier=booleanAnd.alwaysFalse]
+comparisons.php:49:Dumped type: NAN
+comparisons.php:49:Dumped type: float<-inf, inf>
+comparisons.php:50:Dumped type: NAN
+comparisons.php:51:Dumped type: float
+comparisons.php:51:Dumped type: float
+comparisons.php:52:Dumped type: *NEVER*
+comparisons.php:52:Dumped type: float
+comparisons.php:52:Loose comparison using != between float and float will always evaluate to false. [identifier=notEqual.alwaysFalse]
+comparisons.php:53:Dumped type: *NEVER*
+comparisons.php:53:Dumped type: float
+comparisons.php:53:Strict comparison using !== between float and float will always evaluate to false. [identifier=notIdentical.alwaysFalse]
+comparisons.php:54:Dumped type: *NEVER*
+comparisons.php:54:Dumped type: float
+comparisons.php:54:Strict comparison using === between float and float will always evaluate to true. [identifier=identical.alwaysTrue]
+comparisons.php:55:Dumped type: NAN|float<[-inf, 0.0)>|float<1.0, inf>
+comparisons.php:55:Dumped type: float<[0.0, 1.0)>
+comparisons.php:56:Dumped type: NAN|float<-inf, 0.0>|int<min, 0>
+comparisons.php:56:Dumped type: float<(0.0, inf]>|int<1, max>
+comparisons.php:57:Dumped type: NAN|float<-inf, 0.0>|null
+comparisons.php:57:Dumped type: float<(0.0, inf]>
+comparisons.php:58:Dumped type: NAN|float<[-inf, 0.0)>
+comparisons.php:58:Dumped type: float<0.0, inf>|null
+comparisons.php:59:Dumped type: float
+comparisons.php:59:Dumped type: float
+comparisons.php:59:Dumped type: mixed
+comparisons.php:59:Dumped type: mixed~null
+comparisons.php:60:Dumped type: mixed~(NAN|float<[-inf, 0.0)>|int<min, -1>)
+comparisons.php:60:Dumped type: mixed~(bool|float<0.0, inf>|int<0, max>|null)
+comparisons.php:61:Dumped type: mixed
+comparisons.php:61:Dumped type: mixed
+comparisons.php:62:Dumped type: 0.5
+comparisons.php:62:Dumped type: mixed~0.5
+comparisons.php:63:Dumped type: NAN
+comparisons.php:63:Dumped type: float<-inf, 0.0>
+comparisons.php:64:Dumped type: NAN
+comparisons.php:64:Dumped type: float<-inf, 0.0>
+comparisons.php:65:Dumped type: *NEVER*
+comparisons.php:65:Dumped type: float
+comparisons.php:66:Dumped type: INF
+comparisons.php:66:Dumped type: NAN|float<[-inf, inf)>
+comparisons.php:67:Dumped type: *NEVER*
+comparisons.php:67:Dumped type: float
+comparisons.php:68:Dumped type: -INF|NAN
+comparisons.php:68:Dumped type: float<(-inf, inf]>
+comparisons.php:69:Dumped type: INF
+comparisons.php:69:Dumped type: NAN|float<[-inf, inf)>
+comparisons.php:70:Dumped type: NAN
+comparisons.php:70:Dumped type: float
+comparisons.php:71:Dumped type: NAN
+comparisons.php:71:Dumped type: float
+comparisons.php:72:Dumped type: NAN
+comparisons.php:72:Dumped type: float
+comparisons.php:73:Dumped type: NAN|float<-inf, 9007199254740992.0>
+comparisons.php:73:Dumped type: float<(9007199254740992.0, inf]>
+comparisons.php:74:Dumped type: int<9007199254740993, max>
+comparisons.php:74:Dumped type: int<min, 9007199254740992>
+comparisons.php:75:Dumped type: NAN|float<-inf, 9.223372036854776E+18>
+comparisons.php:75:Dumped type: float<(2147483647.0, inf]>
+comparisons.php:76:Dumped type: *NEVER*
+comparisons.php:76:Dumped type: float
+comparisons.php:77:Dumped type: float<(0.7, 0.8)>|float<(0.8, 0.9)>
+comparisons.php:81:Match expression does not handle remaining value: true [identifier=match.unhandled]
+comparisons.php:90:Comparison operation "<=" between float<0.0, 0.5> and 0.5 is always true. [identifier=smallerOrEqual.alwaysTrue]
+comparisons.php:94:Comparison operation ">" between float<(0.0, inf]> and 0.0 is always true. [identifier=greater.alwaysTrue]
+comparisons.php:95:Comparison operation "<=" between float<(0.0, inf]> and 0.0 is always false. [identifier=smallerOrEqual.alwaysFalse]
+comparisons.php:96:Comparison operation ">" between float<(0.0, inf]> and 0.0 is always true. [identifier=greater.alwaysTrue]
+comparisons.php:97:Comparison operation "<=" between float<(0.0, inf]> and 0.0 is always false. [identifier=smallerOrEqual.alwaysFalse]
+comparisons.php:97:Result of && is always false. [identifier=booleanAnd.alwaysFalse]
+comparisons.php:98:Strict comparison using !== between float and float will always evaluate to false. [identifier=notIdentical.alwaysFalse]
+comparisons.php:99:Strict comparison using === between float and float will always evaluate to true. [identifier=identical.alwaysTrue]
+comparisons.php:100:Loose comparison using == between float and float will always evaluate to true. [identifier=equal.alwaysTrue]
+comparisons.php:103:Comparison operation ">" between float<0.0, 1.0> and 1.0 is always false. [identifier=greater.alwaysFalse]
+comparisons.php:104:Comparison operation ">=" between float<0.0, 1.0> and 0.0 is always true. [identifier=greaterOrEqual.alwaysTrue]
+comparisons.php:105:Strict comparison using === between float<0.0, 1.0> and 2.0 will always evaluate to false. [identifier=identical.alwaysFalse]
+comparisons.php:106:Comparison operation "<=" between float<0.0, 0.5> and 0.5 is always true. [identifier=smallerOrEqual.alwaysTrue]
+comparisons.php:106:Result of || is always true. [identifier=booleanOr.alwaysTrue]
+comparisons.php:107:Call to function is_nan() with float<0.0, 1.0> will always evaluate to false. [identifier=function.impossibleType]
+comparisons.php:109:Strict comparison using !== between float<0.0, 1.0> and float<0.0, 1.0> will always evaluate to false. [identifier=notIdentical.alwaysFalse]

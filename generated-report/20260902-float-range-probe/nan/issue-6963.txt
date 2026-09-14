@@ -1,0 +1,61 @@
+author:	VincentLanglet
+association:	contributor
+edited:	false
+status:	none
+--
+I take a look and at first implementation seems easy by copying IntegerRangeType.
+
+But an issue I see with FloatRange is the fact we might need to exclude the limit sometimes.
+
+If `float<0.0, 10.0>` represents all the float between 0 and 10, how do I exclude 0 for instance ?
+
+`float<0.0, 10.0> ~ 0.0` is not a great syntax and `float ~ 0.0` is already not supported...
+https://phpstan.org/r/5d999b51-465b-41d0-8340-91e9ad7d8b27
+
+I should be able to have
+- [0.0, 10.0]
+- ]0.0, 10.0]
+- [0.0, 10.0[
+- ]0.0, 10.0[
+
+Not sure if you had something in mind @ondrejmirtes @staabm for this
+--
+author:	ondrejmirtes
+association:	member
+edited:	false
+status:	none
+--
+I would not start by copying IntegerRangeType. Floats are different. In `int<1, 5>` you have a finite number of integers but in `float<1, 5>` you gave an infinite number of floats.
+--
+author:	ondrejmirtes
+association:	member
+edited:	false
+status:	none
+--
+Yeah, difference between closed and open interval should also be explored.
+--
+author:	mvorisek
+association:	contributor
+edited:	false
+status:	none
+--
+Floating numbers are not exact, for example `0.1` cannot be represented exactly [1]. The question is what would be the meaning of open vs. closed interval.
+
+If there would be a syntax for `(0.1, 0.2)` (open interval, ie. without endpoints), what would be the meaning? Will it exclude the "nearest representable 0.1", even if such number is greater than 0.1?
+
+[1] https://3v4l.org/XEvdH
+--
+author:	VincentLanglet
+association:	contributor
+edited:	false
+status:	none
+--
+> Floating numbers are not exact, for example `0.1` cannot be represented exactly [1]. The question is what would be the meaning of open vs. closed interval.
+> 
+> If there would be a syntax for `(0.1, 0.2)` (open interval, ie. without endpoints), what would be the meaning? Will it exclude the "nearest representable 0.1", even if such number is greater than 0.1?
+
+It mostly useful for https://github.com/phpstan/phpstan/issues/13859
+positive-float would be `]0, max[`
+
+but indeed it's weird for most of other range...
+--

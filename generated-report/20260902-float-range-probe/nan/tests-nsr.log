@@ -1,0 +1,42 @@
+=== NodeScopeResolverTest ===
+PHPUnit 11.5.52 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.9
+Configuration: /private/tmp/claude-501/-Users-megurine-repo-php-phpstan-src/57c31198-af9c-47de-b856-bda8e5738efb/scratchpad/review-float-nan/phpunit.xml
+Random Seed:   1788313686
+
+Time: 00:31.378, Memory: 292.50 MB
+
+OK (1711 tests, 1711 assertions)
+=== Rules/Comparison ===
+PHPUnit 11.5.52 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.9
+Configuration: /private/tmp/claude-501/-Users-megurine-repo-php-phpstan-src/57c31198-af9c-47de-b856-bda8e5738efb/scratchpad/review-float-nan/phpunit.xml
+Random Seed:   1788313719
+
+Time: 00:07.277, Memory: 232.50 MB
+
+OK (439 tests, 439 assertions)
+=== Rules/Functions ===
+PHPUnit 11.5.52 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.9
+Configuration: /private/tmp/claude-501/-Users-megurine-repo-php-phpstan-src/57c31198-af9c-47de-b856-bda8e5738efb/scratchpad/review-float-nan/phpunit.xml
+Random Seed:   1788313727
+
+Time: 00:06.143, Memory: 186.50 MB
+
+OK, but some tests were skipped!
+Tests: 486, Assertions: 483, Skipped: 4.
+=== Rules/Cast Arrays ===
+PHPUnit 11.5.52 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.5.9
+Configuration: /private/tmp/claude-501/-Users-megurine-repo-php-phpstan-src/57c31198-af9c-47de-b856-bda8e5738efb/scratchpad/review-float-nan/phpunit.xml
+Random Seed:   1788313734
+
+Time: 00:02.659, Memory: 120.50 MB
+
+OK, but some tests were skipped!
+Tests: 211, Assertions: 208, Skipped: 3.

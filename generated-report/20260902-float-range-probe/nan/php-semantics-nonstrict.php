@@ -1,0 +1,35 @@
+<?php
+set_error_handler(function ($no, $str) { echo "  [W] $str\n"; return true; });
+function t(string $label, callable $f): void { echo $label, ' => '; try { $r = $f(); echo var_export($r, true), "\n"; } catch (\Throwable $e) { echo get_class($e), ': ', $e->getMessage(), "\n"; } }
+echo "non-strict mode\n";
+t('is_finite("1e500")', fn() => is_finite("1e500"));
+t('is_infinite("1e500")', fn() => is_infinite("1e500"));
+t('is_finite("1")', fn() => is_finite("1"));
+t('is_nan("abc")', fn() => is_nan("abc"));
+t('is_nan("NAN")', fn() => is_nan("NAN"));
+t('is_nan("1e500")', fn() => is_nan("1e500"));
+t('is_finite(true)', fn() => is_finite(true));
+t('is_finite(null)', fn() => is_finite(null));
+t('is_nan(null)', fn() => is_nan(null));
+t('is_nan(PHP_INT_MAX)', fn() => is_nan(PHP_INT_MAX));
+t('is_finite("  1")', fn() => is_finite("  1"));
+t('is_finite("1abc")', fn() => is_finite("1abc"));
+t('str_repeat("x", NAN) nonstrict', fn() => str_repeat('x', NAN));
+t('str_repeat("x", 2.0) nonstrict', fn() => str_repeat('x', 2.0));
+t('array_fill(0, NAN, 1) nonstrict', fn() => array_fill(0, NAN, 1));
+t('(int)"NAN"', fn() => (int) "NAN");
+t('"NAN" == NAN', fn() => "NAN" == NAN);
+t('echo NAN', function() { ob_start(); echo NAN; return ob_get_clean(); });
+t('"$x" interp', function() { $x = NAN; return "$x"; });
+t('NAN . ""', fn() => NAN . "");
+t('strval(NAN)', fn() => strval(NAN));
+t('if(NAN)', function() { if (NAN) { return 'truthy'; } return 'falsy'; });
+t('NAN && true', fn() => NAN && true);
+t('NAN ?? 1', fn() => NAN ?? 1);
+t('(bool)INF', fn() => (bool) INF);
+t('(string)INF', fn() => (string) INF);
+t('(string)1e19', fn() => (string) 1e19);
+t('1e19 % 2', fn() => 1e19 % 2);
+t('2 % 1.5', fn() => 2 % 1.5);
+t('array key 1.5', fn() => array_keys([1.5 => 1]));
+t('array key 2^63', fn() => array_keys([9223372036854775808.0 => 1]));

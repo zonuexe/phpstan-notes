@@ -1,0 +1,33 @@
+author:	bea4dev
+association:	none
+edited:	false
+status:	none
+--
+## Implementation Proposal / Alternative Approach:
+
+I initially thought about handling this by adding a `checkFloatStrict` flag and a `toStringStrict(Type $type): Type` method to `RuleLevelHelper` (returning `ErrorType` when encountering `float`). However, after giving it more thought, creating such a rule-specific helper method feels too ad-hoc.
+
+Instead, a cleaner and more fundamental approach would be introducing better `float` range/subtraction support (e.g., via `FloatRangeType`) so that `is_nan()` can properly narrow the type.
+
+This would allow distinguishing `NAN` from `float~NAN` natively within the type system:
+
+```php
+<?php declare(strict_types = 1);
+
+use function PHPStan\dumpType;
+
+function printFloat(float $f): void
+{
+    if (is_nan($f)) {
+        dumpType($f); // Expected: NAN
+    } else {
+        dumpType($f); // Expected: float~NAN
+    }
+}
+
+```
+
+If `is_nan()` can narrow the type to `float~NAN`, the string-casting check in PHP 8.5 can simply verify whether the given type contains `NAN` (or if it has been guarded), making the implementation much cleaner without relying on ad-hoc rules.
+
+
+--

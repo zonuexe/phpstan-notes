@@ -1,0 +1,72 @@
+int-interaction.php:20:Parameter #1 $i of function ProbeInt\takesInt expects int, float given. [identifier=argument.type]
+int-interaction.php:20:Parameter #1 $i of function ProbeInt\takesInt expects int, float given. [identifier=argument.type]
+int-interaction.php:20:Parameter #1 $i of function ProbeInt\takesInt expects int, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:20:Parameter #1 $i of function ProbeInt\takesInt expects int, float<2.0, 3.0> given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, float given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, float<0.0, 1.0>|int given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, int given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, int given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, int<0, 2> given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, string given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, string given. [identifier=argument.type]
+int-interaction.php:21:Parameter #1 $u of function ProbeInt\takesUnit expects float<0.0, 1.0>, true given. [identifier=argument.type]
+int-interaction.php:22:Parameter #1 $i of function ProbeInt\takesInt01 expects int<0, 1>, 1.0 given. [identifier=argument.type]
+int-interaction.php:22:Parameter #1 $i of function ProbeInt\takesInt01 expects int<0, 1>, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:23:Parameter #1 $x of function ProbeInt\takesEither expects float<0.0, 1.0>|int<0, 1>, float given. [identifier=argument.type]
+int-interaction.php:24:Dumped type: non-empty-array<int|string, mixed>
+int-interaction.php:24:Invalid array key type float<0.0, 1.0>. [identifier=offsetAccess.invalidOffset]
+int-interaction.php:25:Dumped type: non-empty-array<int, 1>
+int-interaction.php:25:Invalid array key type float<0.0, 1.0>. [identifier=array.invalidKey]
+int-interaction.php:26:Dumped type: non-empty-array<int, 1>
+int-interaction.php:26:Invalid array key type float<2.0, 3.0>. [identifier=array.invalidKey]
+int-interaction.php:27:Dumped type: array{1: 1}
+int-interaction.php:27:Invalid array key type float. [identifier=array.invalidKey]
+int-interaction.php:28:Dumped type: 1.0
+int-interaction.php:29:Call to function is_int() with float<0.0, 1.0> will always evaluate to false. [identifier=function.impossibleType]
+int-interaction.php:29:Dumped type: *NEVER*
+int-interaction.php:29:Dumped type: float<0.0, 1.0>
+int-interaction.php:30:Call to function is_float() with int will always evaluate to false. [identifier=function.impossibleType]
+int-interaction.php:30:Dumped type: *NEVER*
+int-interaction.php:31:Dumped type: float<0.0, 1.0>
+int-interaction.php:31:Dumped type: int
+int-interaction.php:32:Call to function is_numeric() with float<0.0, 1.0> will always evaluate to true. [identifier=function.alreadyNarrowedType]
+int-interaction.php:32:Dumped type: float<0.0, 1.0>
+int-interaction.php:33:Dumped type: float<(0.5, 1.0]>|int<1, max>
+int-interaction.php:33:Dumped type: float<0.0, 0.5>|int<min, 0>
+int-interaction.php:34:Dumped type: 0.5
+int-interaction.php:35:Dumped type: 1
+int-interaction.php:36:Dumped type: bool
+int-interaction.php:37:Dumped type: array{float<0.0, 1.0>, int<0, 1>}
+int-interaction.php:37:Dumped type: float
+int-interaction.php:37:Dumped type: numeric-string&uppercase-string
+int-interaction.php:38:Dumped type: bool
+int-interaction.php:38:Parameter #1 $key of function array_key_exists expects int|string, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:39:Dumped type: bool
+int-interaction.php:39:Dumped type: bool
+int-interaction.php:39:Dumped type: bool
+int-interaction.php:39:Dumped type: false
+int-interaction.php:39:Dumped type: true
+int-interaction.php:39:Loose comparison using == between 1.0 and 1 will always evaluate to true. [identifier=equal.alwaysTrue]
+int-interaction.php:39:Strict comparison using === between 1.0 and 1 will always evaluate to false. [identifier=identical.alwaysFalse]
+int-interaction.php:40:Dumped type: int
+int-interaction.php:40:Dumped type: int
+int-interaction.php:40:Dumped type: int
+int-interaction.php:40:Dumped type: int
+int-interaction.php:40:Dumped type: int<-1, 1>
+int-interaction.php:40:Parameter #1 $num1 of function intdiv expects int, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:41:Dumped type: literal-string&lowercase-string
+int-interaction.php:41:Dumped type: non-empty-list<float|int>
+int-interaction.php:41:Dumped type: non-empty-string
+int-interaction.php:41:Parameter #1 $codepoint of function chr expects int<0, 255>, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:41:Parameter #2 $times of function str_repeat expects int, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:42:Dumped type: non-empty-array<int, 'x'>
+int-interaction.php:42:Parameter #1 $start_index of function array_fill expects int, float<0.0, 1.0> given. [identifier=argument.type]
+int-interaction.php:43:Dumped type: float
+int-interaction.php:43:Dumped type: numeric-string
+int-interaction.php:43:Dumped type: string
+int-interaction.php:44:Dumped type: bool
+int-interaction.php:44:Dumped type: bool
+int-interaction.php:44:Dumped type: float<0.0, 1.0>
+int-interaction.php:44:Dumped type: int<0, 1>
+int-interaction.php:44:Dumped type: non-empty-string|false
+int-interaction.php:44:Dumped type: numeric-string&uppercase-string
